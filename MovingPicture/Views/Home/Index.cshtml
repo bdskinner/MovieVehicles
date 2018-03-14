@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Northern Michigan Moving Picture Association";
+}
+
+<div class="jumbotron">
+    <h1>Northern Michigan Moving Picture Association</h1>
+    <!-- <p class="lead">Northern Michigan Moving Picture Association</p> -->
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>What is the Moving Picture Association?</h2>
+        <p>
+            The website for the Northern Michigan Moving Picture Association's allows visitors access to a variety of information about movies 
+            including the title, release date, storyline, director, the movie's length, and genre.  Visitors to the website can browse a list 
+            of movies or use the search feature to find specific movies.  The website's search feature allows visitors to search for specific 
+            movies based on several criteria including: the movie’s title, release date, director, movie length, and genre.
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>Getting Started</h2>
+        <p>To start browsing the site for your favorite movies click the link below.</p>
+        <!-- <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p> -->
+        <p><button type="button" onclick="location.href='@Url.Action("Index", "Movie")'" class="btn">Movie Listing</button></p>
+    </div>
+</div>
