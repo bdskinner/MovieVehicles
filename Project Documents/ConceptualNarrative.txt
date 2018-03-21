@@ -1,0 +1,33 @@
+The narrative includes
+
+·        A general discussion of the purpose of the application.
+
+·        A description of the audience.
+
+·        A description of the reviews structure.
+
+·        A description of how the reviews will be presented to the user including the sorting and filtering options.
+
+
+
+The Limelight Movie Vehicle Web App will be designed to provide the user with basic information concerning famous vehicles (cars, planes, ships, etc.) used in T.V. shows and movies.  The user will be able to view photos of the vehicle as well as its description, when and where it was created, who is responsible for the vehicle's creation, and the vehicle's current status.  The user will be able to search for vehicles by Listing Title.  The user will also be able to filter the vehicles by type of vehicle, whether it was used in a T.V. show or movie, or by who created the vehicle.  The general user will be able to view vehicle information, a subscribed user will be able to add a review for a vehicle, and the web app administrator will be able to add, delete, or modify vehicle information.
+
+The intended audience of The Limelight Movie Vehicle Web App will be people who are not only interested in movies, but also interested in how movies are made.  Other possible user of the Movie Vehicle App are people also interested in custom vehicles.
+
+The structure for the reviews that the subscribed user will be able to submit will consist of the following database fields:
+
+	- Review Title
+	- Reviewer First Name
+	- Reviewer Last Name
+	- Review Date
+	- Review Text
+
+The user will initially be presented with a list of reviews that will be listed on the Reviews page of the web app.  The user will be able to click on the review title link and view the details of the review.  The details of the reivew will include the Review Title, Reviewer Name, the date the review was posted, and the text of the review.  The user will also be able to sort the list of reviews by alpbeticaly, date posted, and reviewer name.  The user will be able to filter the reviews by vehicle, date posted, and reviewer name.
+
+
+
+
+
+
+
+

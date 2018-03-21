@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieVehicles.Models;
+using System.Collections.Generic;
 
 namespace MovieVehicles.Controllers
 {
@@ -139,6 +140,15 @@ namespace MovieVehicles.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            List<string> states = new List<string>();
+
+            states.Add("IL");
+            states.Add("IN");
+            states.Add("MI");
+            states.Add("OH");
+            states.Add("WI");
+            ViewBag.States = states;
+
             return View();
         }
 
@@ -151,7 +161,7 @@ namespace MovieVehicles.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, City = model.City, State = model.State };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

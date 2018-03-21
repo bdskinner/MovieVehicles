@@ -16,12 +16,21 @@ namespace MovieVehicles.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        //Extended Properties.
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string City { get; set; }
+
+        public string State { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("MovieVehiclesDB_remote", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +38,11 @@ namespace MovieVehicles.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Vehicle> Vehicles { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<Event> Events { get; set; }
     }
 }
