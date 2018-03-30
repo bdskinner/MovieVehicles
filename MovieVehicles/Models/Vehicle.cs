@@ -15,11 +15,11 @@ namespace MovieVehicles.Models
         public string CreatedBy { get; set; }
 
         [Required]
-        [Display(Name = "Date Created")]
-        public DateTime DateCreated { get; set; }
-
-        [Required]
         public string Description { get; set; }
+
+        public string Make { get; set; }
+
+        public string Model { get; set; }
 
         [Required]
         [Display(Name = "Movie Poster Path")]
@@ -38,6 +38,8 @@ namespace MovieVehicles.Models
         [Required]
         [Display(Name = "Vehicle Name")]
         public string VehicleName { get; set; }
+
+        public int Year { get; set; }
 
         #endregion
 

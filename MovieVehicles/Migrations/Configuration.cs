@@ -35,7 +35,6 @@ namespace MovieVehicles.Migrations
                     VehicleName = "Greek Fire",
                     Description = "This modified version of a ford fiesta took John Velis on his big adventure through Empire, MI",
                     CreatedBy = "John E. Velis",
-                    DateCreated = new DateTime(2010, 3, 1),
                     MovieTitle = "Johnny Vs Big Adventure",
                     MoviePoster = "C:\\johnvadv.jpg",
                     Status = "Housed in the Empire Movie Vehicle Museum."
@@ -46,7 +45,6 @@ namespace MovieVehicles.Migrations
                     VehicleName = "Zeus's Chariot",
                     Description = "This modified version of a 1986 ford pinto took John Velis on his big adventure through Cedar, MI",
                     CreatedBy = "John E. Velis",
-                    DateCreated = new DateTime(2012, 3, 3),
                     MovieTitle = "Johnny Vs Big Adventure: Johnny Goes East",
                     MoviePoster = "C:\\johnvadv2.jpg",
                     Status = "Housed in the Empire Movie Vehicle Museum."
@@ -57,7 +55,6 @@ namespace MovieVehicles.Migrations
                     VehicleName = "Athens Arrow",
                     Description = "This modified version of a 1989 Mini Cooper took John Velis on his biggest adventure ever to Traverse City, MI",
                     CreatedBy = "John E. Velis",
-                    DateCreated = new DateTime(2014, 5, 3),
                     MovieTitle = "Johnny Vs Big Adventure: Ride Johnny Ride",
                     MoviePoster = "C:\\johnvadv3.jpg",
                     Status = "Housed in the Empire Movie Vehicle Museum."

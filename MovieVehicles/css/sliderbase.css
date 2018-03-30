@@ -1,0 +1,108 @@
+@import url(http://fonts.googleapis.com/css?family=Jacques+Francois);
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans);
+
+/* Tags */
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-image: url("../media/bridge.jpg");
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+body, button {
+    font-family: 'Jacques Francois', serif;
+}
+
+button {
+    font-size: 90%;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+h1{
+    font-size: 3em;
+}
+
+h1,h3 {
+    text-align: center;
+    text-shadow:2px 2px black;
+}
+
+h2, h3 {
+    font-weight: normal;
+    margin: 0;
+}
+
+h2 {
+    color: #666;
+    letter-spacing: 0.14em;
+    line-height: 1em;
+    padding: 20px 0 0 20px;
+    text-align:center;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size:2em;
+    letter-spacing: 0.2em;
+}
+
+p {
+    font-family: 'Quattrocento Sans', sans-serif;
+    line-height: 1.4em;
+}
+
+section{
+    width:50%;
+}
+
+/* Classes */
+
+h1.PageHeader{
+    text-shadow: 3px 3px 8px rgb(204, 200, 204);
+}
+
+.icon-bar {
+    overflow: auto; 
+}
+
+.icon-bar a {
+    float: left; /* Float links side by side */
+    width:10%;
+    text-align: center; /* Center-align text */
+    margin-right:1%;
+    transition: all 0.3s ease; /* Add transition for hover effects */
+    color: white; /* White text color */
+    font-size: 36px; /* Increased font size */
+    background:white;
+    color:black;
+    border-radius:20px;  
+}
+.icon-bar a:hover {
+    color:red; /* Add a hover color */
+}
+
+.page {
+    margin: 0 auto 30px auto;
+    max-width: 640px;
+}
+  
+.panel {
+    background-color: #fff;
+    box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+    color: #666;
+    overflow: auto;
+}
+
+/* ID's */
+
+
+
+
+
+

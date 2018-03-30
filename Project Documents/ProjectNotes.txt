@@ -1,14 +1,9 @@
-Topical Web App
+Limelight Movie Vehicle DB Web App
 
 General
 
 * Data Annotations “Display” Attribute
 https://stackoverflow.com/questions/12735757/mvc-4-data-annotations-display-attribute
-
-Themes
-
-* Bootstrap Themes
-https://bootswatch.com
 
 * HTML Helper Dropdown List filled with list of genres
 http://www.tutorialsteacher.com/mvc/htmlhelper-dropdownlist-dropdownlistfor
@@ -16,12 +11,43 @@ http://www.tutorialsteacher.com/mvc/htmlhelper-dropdownlist-dropdownlistfor
 * Data Annotations for Data Validation
 https://joeylicc.wordpress.com/2013/06/20/asp-net-mvc-model-validation-using-data-annotations/
 
+* Internet Movie Car Database
+https://www.imcdb.org
+
+* Cars of Dreams Museum
+https://www.carsofdreams.com
+
+* How to Use ViewModel in Asp.Net MVC
+http://tutlane.com/tutorial/aspnet-mvc/how-to-use-viewmodel-in-asp-net-mvc-with-example
+
+Themes
+
+* Bootstrap Themes
+https://bootswatch.com
+
+Vehicle Specific Info.
+
+* Delorean (BTTF)
+https://www.hollywoodreporter.com/news/back-future-delorean-at-petersen-886181
+
+* Bullitt Mustang
+https://www.hagerty.com/articles-videos/articles/2018/01/14/mustang-bullitt-found-real-mcqueen
+
+* George Barris Batmobile
+http://1966batmobile.com
+
 
 
 
 
 Azure Information
 
-App Name: MovingPictureAssoc
-Azure URL: http://movingpictureassoc.azurewebsites.net
-Github Repo URL: https://github.com/bdskinner/MovingPicture
+App Name: LimelightMovieVehiclesDB
+Azure URL: http://limelightmovievehiclesdb.azurewebsites.net
+Github Repo URL: https://github.com/bdskinner/MovieVehicles
+
+Server Name: cit218skinner.database.windows.net
+SQL Server DB Name: MovieVehiclesDB
+
+
+

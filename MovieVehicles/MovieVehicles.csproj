@@ -191,6 +191,14 @@
     <Compile Include="Migrations\201803211853597_EventsModel2.Designer.cs">
       <DependentUpon>201803211853597_EventsModel2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803282117525_VehiclesModel.cs" />
+    <Compile Include="Migrations\201803282117525_VehiclesModel.Designer.cs">
+      <DependentUpon>201803282117525_VehiclesModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803282153030_VehiclesModel1.cs" />
+    <Compile Include="Migrations\201803282153030_VehiclesModel1.Designer.cs">
+      <DependentUpon>201803282153030_VehiclesModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -201,16 +209,29 @@
     <Compile Include="Models\VehiclePhoto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ReviewVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\slider.css" />
+    <Content Include="css\sliderbase.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\jquery-1.11.0.min.js" />
+    <Content Include="js\slider.js" />
+    <Content Include="Photos\BaTumbler_HD.jpg" />
+    <Content Include="Photos\BullittMustang.jpg" />
+    <Content Include="Photos\General_lee.jpg" />
+    <Content Include="Photos\Herbie.jpg" />
+    <Content Include="Photos\lotuss1.jpg" />
+    <Content Include="Photos\OriginalDelorean.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\LimelightMovieVehiclesDB - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\LimelightMovieVehiclesDB - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -259,11 +280,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Vehicles\Create.cshtml" />
-    <Content Include="Views\Vehicles\Delete.cshtml" />
-    <Content Include="Views\Vehicles\Details.cshtml" />
-    <Content Include="Views\Vehicles\Edit.cshtml" />
-    <Content Include="Views\Vehicles\Index.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
@@ -274,6 +290,11 @@
     <Content Include="Views\Reviews\Details.cshtml" />
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\Vehicles\Create.cshtml" />
+    <Content Include="Views\Vehicles\Delete.cshtml" />
+    <Content Include="Views\Vehicles\Details.cshtml" />
+    <Content Include="Views\Vehicles\Edit.cshtml" />
+    <Content Include="Views\Vehicles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -295,6 +316,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803211853597_EventsModel2.resx">
       <DependentUpon>201803211853597_EventsModel2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803282117525_VehiclesModel.resx">
+      <DependentUpon>201803282117525_VehiclesModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803282153030_VehiclesModel1.resx">
+      <DependentUpon>201803282153030_VehiclesModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

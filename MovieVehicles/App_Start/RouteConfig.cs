@@ -18,6 +18,12 @@ namespace MovieVehicles
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Reviews",
+                url: "{controller}/{action}/{sortOrder}",
+                defaults: new { controller = "Reviews", action = "Index", sortOrder = UrlParameter.Optional }
+            );
         }
     }
 }

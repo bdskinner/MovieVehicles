@@ -1,10 +1,48 @@
-﻿@model IEnumerable<MovieVehicles.Models.Review>
+﻿@*@model IEnumerable<MovieVehicles.Models.Review>*@
+@model IList<MovieVehicles.ViewModels.ReviewVM>
+@*@model List<MovieVehicles.ViewModels.ReviewVM>*@
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br /><br />
+<h2>Vehicle Reviews</h2>
+<br /><br />
+
+
+
+@using (Html.BeginForm())
+{
+    <div id="FilterSearch" class="form-horizontal">
+        <!-- Search by Revievw Title Textbox. -->
+        <div class="form-group">
+            @Html.Label("Search by Review Title:", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.TextBox("searchTitle", null, new { @class = "form-control" })
+        </div>
+
+        <!-- Search by Vehicle Name Textbox. -->
+        <div class="form-group">
+            @Html.Label("Search by Vehicle Name:", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.TextBox("searchName", null, new { @class = "form-control" })
+        </div>
+
+        @*<div class="form-group">
+            @Html.Label("Filter by Genre:", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("genrefilter", new SelectList(ViewBag.Genres), "All Genres", new { @class = "form-control" })
+        </div>*@
+
+        <!-- "Search" and "Reset" Buttons. -->
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Find Movies" class="btn col-md-2 col-md-offset-2" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="Reset Movie List" onclick="location.href='@Url.Action("Index", "Movie")'" class="btn col-md-2 col-md-offset-2" />
+        </div>
+    </div>
+}
+
+
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,22 +50,20 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @*@Html.DisplayNameFor(model => model.ReviewTitle)*@
+            @*Review Title*@
+
+            @Html.ActionLink("Review Title", "Index", new { sortOrder = "Title" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @*@Html.DisplayNameFor(model => model.ReviewDate)*@
+            @*Review Date*@
+            @Html.ActionLink("Review Date", "Index", new { sortOrder = "Date" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ReviewDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReviewText)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReviewTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehicleID)
+            @*@Html.DisplayNameFor(model => model.VehicleName)*@
+            @*Vehicle Name*@
+            @Html.ActionLink("Vehicle Name", "Index", new { sortOrder = "VehicleName" })
         </th>
         <th></th>
     </tr>
@@ -35,22 +71,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
+            @Html.DisplayFor(modelItem => item.ReviewTitle)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ReviewDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ReviewText)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReviewTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleID)
+            @Html.DisplayFor(modelItem => item.VehicleName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ReviewID }) |

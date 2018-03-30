@@ -46,7 +46,7 @@ namespace MovieVehicles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VehicleID,CreatedBy,DateCreated,Description,MoviePoster,MovieTitle,Status,VehicleName")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "VehicleID,CreatedBy,Description,Make,Model,MoviePoster,MovieTitle,Status,VehicleName,Year")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace MovieVehicles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VehicleID,CreatedBy,DateCreated,Description,MoviePoster,MovieTitle,Status,VehicleName")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "VehicleID,CreatedBy,Description,Make,Model,MoviePoster,MovieTitle,Status,VehicleName,Year")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
