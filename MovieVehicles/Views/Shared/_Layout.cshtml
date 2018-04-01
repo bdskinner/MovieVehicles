@@ -9,7 +9,8 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">*@
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,14 +22,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Vehicles", "Index", "Vehicles")</li>
-                    <li>@Html.ActionLink("Events", "Index", "Events")</li>
-                    <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
+                    <li>@Html.ActionLink("Vehicles", "Index", "Vehicles")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                    <li>@Html.ActionLink("Events", "Index", "Events")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                    <li>@Html.ActionLink("Reviews", "Index", "Reviews")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />

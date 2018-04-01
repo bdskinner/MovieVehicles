@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieVehicles.Models;
+using MovieVehicles.Enums;
 
 namespace MovieVehicles.Controllers
 {
@@ -14,10 +15,99 @@ namespace MovieVehicles.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Events
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Events.ToList());
+            //Get a list of states.
+            var StateAbbr = Enum.GetValues(typeof(Enums.Enumerations.States)).OfType<Enums.Enumerations.States>().ToList();
+            ViewBag.States = StateAbbr.ToList();
+
+            //Get a list of the events.
+            var eventList = (from v in db.Events
+                               select v).ToList();
+
+            //Sort the records.
+            switch (sortOrder)
+            {
+                case "Date":
+                    eventList = (from v in eventList
+                                   orderby v.EventDate ascending
+                                   select v).ToList();
+                    break;
+                case "City":
+                    eventList = (from v in eventList
+                                   orderby v.EventCity ascending
+                                   select v).ToList();
+                    break;
+                case "State":
+                    eventList = (from v in eventList
+                                 orderby v.EventState ascending
+                                 select v).ToList();
+                    break;
+                default:
+                    //If no sort order is specified sort by the event title.
+                    eventList = (from v in eventList
+                                   orderby v.EventTitle ascending
+                                   select v).ToList();
+                    break;
+            }
+
+            return View(eventList.ToList());
+
+
+
+
+            //return View(db.Events.ToList());
+        }
+
+        [HttpPost]
+        //public ActionResult Index(string searchTitle, string searchName, int? page)
+        public ActionResult Index(string searchTitle, string searchCity, string searchstate)
+        {
+            //Variable Declarations.
+            //IEnumerable<Review> reviews;
+            //IEnumerable<Movie> movieResults = null;
+            //int pageSize = 50;
+            //int pageNumber = (page ?? 1);
+
+            //Get a list of states.
+            var StateAbbr = Enum.GetValues(typeof(Enums.Enumerations.States)).OfType<Enums.Enumerations.States>().ToList();
+            ViewBag.States = StateAbbr.ToList();
+
+            //Get a list of the events.
+            var eventList = (from v in db.Events
+                               select v).ToList();
+
+
+            //If the movie title was passed to the action, search by the title entered.
+            if (searchTitle != null)
+            {
+                eventList = (from v in eventList
+                               where v.EventTitle.ToUpper().Contains(searchTitle.ToUpper())
+                               select v).ToList();
+            }
+
+            //If the vehicle name was passed to the action, search by the title entered.
+            if (searchCity != null)
+            {
+                eventList = (from v in eventList
+                               where v.EventCity.ToUpper().Contains(searchCity.ToUpper())
+                               select v).ToList();
+            }
+
+            //If the Genre was passed to the action, sort by the genre selected.
+            if (searchstate != "" || searchstate != "Choose a State" || searchstate == null)
+            {
+                eventList = (from v in eventList
+                               where v.EventState.ToUpper().Contains(searchstate.ToUpper())
+                               select v).ToList();
+            }
+
+            //Set Paginate settings.
+            //movies = movies.ToPagedList(pageNumber, pageSize);
+
+            //Return the view.
+            return View(eventList.ToList());
         }
 
         // GET: Events/Details/5

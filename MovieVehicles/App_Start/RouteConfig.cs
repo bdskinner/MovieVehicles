@@ -24,6 +24,12 @@ namespace MovieVehicles
                 url: "{controller}/{action}/{sortOrder}",
                 defaults: new { controller = "Reviews", action = "Index", sortOrder = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Vehicles",
+                url: "{controller}/{action}/{searchTitle}/{searchName}/{createdBy}",
+                defaults: new { controller = "Reviews", action = "Index", searchTitle = UrlParameter.Optional, searchName = UrlParameter.Optional, createdBy = UrlParameter.Optional }
+            );
         }
     }
 }

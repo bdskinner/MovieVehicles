@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: gray;
+    /* background-color: gray; */
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -26,6 +26,7 @@ textarea {
 
 /* Classes */
 
+/*
 .BlackText {
     color: #000000;
 }
@@ -35,11 +36,14 @@ textarea {
     font-family: 'Century Gothic';
     text-decoration: none;
 }
+    */
 
 /* Psuedo-Classes */
 
+/*
 a:active, a:visited {
     color: #ffffff;
     font-family: 'Century Gothic';
     text-decoration: none;
 }
+*/

@@ -14,10 +14,105 @@ namespace MovieVehicles.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Vehicles
-        public ActionResult Index()
+        [HttpGet]
+        //public ActionResult Index()
+        public ActionResult Index(string sortOrder, int? page)
         {
-            return View(db.Vehicles.ToList());
+            //Variable Declarations.
+            //MovieRepository movieRepository = new MovieRepository();
+            //IEnumerable<Movie> movies;
+            //int pageSize = 50;
+            //int pageNumber = (page ?? 1);
+
+            //Get a list of the vehicles.
+            var vehicleList = (from v in db.Vehicles
+                              select v).ToList();
+
+            //Sort the records.
+            switch (sortOrder)
+            {
+                case "CreatedBy":
+                    vehicleList = (from v in vehicleList
+                                  orderby v.CreatedBy ascending
+                                  select v).ToList();
+                    break;
+                case "Title":
+                    vehicleList = (from v in vehicleList
+                                   orderby v.MovieTitle ascending
+                                   select v).ToList();
+                    break;
+                default:
+                    //If no sort order is specified sort by the vehicle's name.
+                    vehicleList = (from v in vehicleList
+                                   orderby v.VehicleName ascending
+                                   select v).ToList();
+                    break;
+            }
+
+            //Set Paginate settings.
+            //movies = movies.ToPagedList(pageNumber, pageSize);
+
+            //Return the view.
+            return View(vehicleList);
+
+
+
+            //return View(db.Vehicles.ToList());
+        }
+
+        [HttpPost]
+        //public ActionResult Index(string searchTitle, string searchName, int? page)
+        public ActionResult Index(string searchTitle, string searchName, string createdBy)
+        {
+            //Variable Declarations.
+            //IEnumerable<Review> reviews;
+            //IEnumerable<Movie> movieResults = null;
+            //int pageSize = 50;
+            //int pageNumber = (page ?? 1);
+
+            var vehicleList = (from v in db.Vehicles
+                               select v).ToList();
+
+
+            //If the movie title was passed to the action, search by the title entered.
+            if (searchTitle != null)
+            {
+                vehicleList = (from v in vehicleList
+                               where v.MovieTitle.ToUpper().Contains(searchTitle.ToUpper())
+                               select v).ToList();
+            }
+
+            //If the vehicle name was passed to the action, search by the title entered.
+            if (searchName != null)
+            {
+                vehicleList = (from v in vehicleList
+                               where v.VehicleName.ToUpper().Contains(searchName.ToUpper())
+                               select v).ToList();
+            }
+
+            //If the created by value was passed to the action, search by the person who created the vehicle.
+            if (createdBy != null)
+            {
+                vehicleList = (from v in vehicleList
+                               where v.CreatedBy.ToUpper().Contains(createdBy.ToUpper())
+                               select v).ToList();
+            }
+
+
+
+            //If the Genre was passed to the action, sort by the genre selected.
+            //if (genreFilter != "" || genreFilter == null)
+            //{
+            //    movies = from m in movies
+            //             where m.GenreTitle == genreFilter
+            //             select m;
+            //}
+
+            //Set Paginate settings.
+            //movies = movies.ToPagedList(pageNumber, pageSize);
+
+            //Return the view.
+            return View(vehicleList);
         }
 
         // GET: Vehicles/Details/5

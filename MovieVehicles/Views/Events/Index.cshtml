@@ -4,7 +4,51 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br /><br />
+<h2>Event Listing</h2>
+<br /><br />
+
+
+
+
+@using (Html.BeginForm())
+{
+    <div id="FilterSearch" class="form-horizontal">
+        <!-- Search by Event Title Textbox. -->
+        <div class="form-group">
+            @Html.Label("Search by Event Title:", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.TextBox("searchTitle", null, new { @class = "form-control" })
+        </div>
+
+        <!-- Search by Event Date Textbox. -->
+        @*<div class="form-group">
+            @Html.Label("Search by Vehicle Name:", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.TextBox("searchDate", null, new { @class = "form-control" })
+        </div>*@
+
+        <!-- Search by Event City Textbox. -->
+        <div class="form-group">
+            @Html.Label("Search by City:", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.TextBox("searchCity", null, new { @class = "form-control" })
+        </div>
+
+        <!-- Search by Event State Textbox. -->
+        <div class="form-group">
+            @Html.Label("Search by State:", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownList("searchState", new SelectList(ViewBag.States), "Choose a State", new { @class = "form-control" })
+        </div>
+
+        <!-- "Search" and "Reset" Buttons. -->
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Find Events" class="btn col-md-2 col-md-offset-2" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="Reset List" onclick="location.href='@Url.Action("Index", "Events")'" class="btn col-md-2 col-md-offset-2" />
+        </div>
+    </div>
+}
+
+
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,22 +56,20 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EventDate)
+            @*@Html.DisplayNameFor(model => model.EventTitle)*@
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.EventTitle).ToString(), "Index", new { sortOrder = "Title" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EventDescription)
+            @*@Html.DisplayNameFor(model => model.EventDate)*@
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.EventDate).ToString(), "Index", new { sortOrder = "Date" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EventCity)
+            @*@Html.DisplayNameFor(model => model.EventCity)*@
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.EventCity).ToString(), "Index", new { sortOrder = "City" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EventState)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EventTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehicleID)
+            @*@Html.DisplayNameFor(model => model.EventState)*@
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.EventState).ToString(), "Index", new { sortOrder = "State" })
         </th>
         <th></th>
     </tr>
@@ -35,22 +77,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.EventDate)
+            @Html.DisplayFor(modelItem => item.EventTitle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EventDescription)
+            @Html.DisplayFor(modelItem => item.EventDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EventCity)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EventState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleID)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.EventID }) |
