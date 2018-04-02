@@ -11,7 +11,7 @@ namespace MovieVehicles.Models
         #region FIELD(S)       
 
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "Reviewer Name")]
         public string FirstName { get; set; }
 
         [Required]

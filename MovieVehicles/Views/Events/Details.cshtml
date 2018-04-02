@@ -4,18 +4,17 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Event</h4>
+    <br /><br />
+    <h4>Event Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.EventDate)
+            @Html.DisplayNameFor(model => model.EventTitle)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EventDate)
+            @Html.DisplayFor(model => model.EventTitle)
         </dd>
 
         <dt>
@@ -24,6 +23,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.EventDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDate)
         </dd>
 
         <dt>
@@ -40,14 +47,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.EventState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventTitle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventTitle)
         </dd>
 
         <dt>

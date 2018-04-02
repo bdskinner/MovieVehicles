@@ -4,18 +4,33 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Vehicle</h4>
+    <br /><br />
+    <h4>Vehicle Details</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleName)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.CreatedBy)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MovieTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MovieTitle)
         </dd>
 
         <dt>
@@ -43,19 +58,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MoviePoster)
+            @Html.DisplayNameFor(model => model.Year)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MoviePoster)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MovieTitle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MovieTitle)
+            @Html.DisplayFor(model => model.Year)
         </dd>
 
         <dt>
@@ -67,19 +74,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.VehicleName)
+            @Html.DisplayNameFor(model => model.MoviePoster)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VehicleName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Year)
+            @Html.DisplayFor(model => model.MoviePoster)
         </dd>
 
     </dl>

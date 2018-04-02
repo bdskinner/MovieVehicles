@@ -26,10 +26,11 @@ namespace MovieVehicles.Models
         public string MoviePoster { get; set; }
 
         [Required]
-        [Display(Name = "Movie Title")]
+        [Display(Name = "Seen In Movie")]
         public string MovieTitle { get; set; }
 
         [Required]
+        [Display(Name = "Vehicle Status")]
         public string Status { get; set; }
 
         [Required]

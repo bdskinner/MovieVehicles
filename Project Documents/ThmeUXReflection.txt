@@ -1,0 +1,5 @@
+Reflection on Theme & UX
+
+So why did you pick your colors and layout. Was it random or does it make sense regarding your site?
+
+To help the Limelight Movie Vehicles website standout from other websites in general I went with a darker background and light text (most sites seem to have a light background with dark text).  Plus the look of the light text on a dark background is a good look (at least I think so).  I have kept the layout for the Limelight website basic so that is it is easy for the user to follow and interact with.  Photos will also be included to add to the graphic nature and visual appeal of the site.

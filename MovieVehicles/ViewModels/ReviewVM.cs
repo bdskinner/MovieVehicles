@@ -15,6 +15,6 @@ namespace MovieVehicles.ViewModels
 
         public int VehicleID { get; set; }   //From Review Model
 
-        public string VehicleName { get; set; }   //From Vehicle Model
+        public string VehicleName { get; set; }   //From Vehicle 
     }
 }
