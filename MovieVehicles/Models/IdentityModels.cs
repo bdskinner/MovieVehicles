@@ -43,6 +43,6 @@ namespace MovieVehicles.Models
 
         public DbSet<Review> Reviews { get; set; }
 
-        public DbSet<Event> Events { get; set; }
+        public DbSet<Event> Events { get; set; }        
     }
 }

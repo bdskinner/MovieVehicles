@@ -2,12 +2,28 @@
 
 @{
     ViewBag.Title = "Details";
+
+    //var pathFile = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/Photos/"), "OriginalDelorean.png");
 }
 
 <div>
     <br /><br />
     <h4>Vehicle Details</h4>
     <hr />
+
+
+
+    @*original photo in db path = ~/Photos/imagename.jpg*@
+    <br /><br /><br />
+    <div>
+        <img src="~/Photos/@Url.Content(@Model.VehiclePhoto)" alt="@Html.DisplayFor(model => model.VehicleName)" style="width: 480px; height: 316px;">
+    </div>
+    <br /><br /><br />
+
+
+
+
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.VehicleName)
@@ -74,11 +90,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MoviePoster)
+            @Html.DisplayNameFor(model => model.VehiclePhoto)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MoviePoster)
+            @Html.DisplayFor(model => model.VehiclePhoto)
         </dd>
 
     </dl>

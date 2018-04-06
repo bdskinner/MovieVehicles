@@ -22,8 +22,8 @@ namespace MovieVehicles.Models
         public string Model { get; set; }
 
         [Required]
-        [Display(Name = "Movie Poster Path")]
-        public string MoviePoster { get; set; }
+        [Display(Name = "Vehicle Photo Path")]
+        public string VehiclePhoto { get; set; }
 
         [Required]
         [Display(Name = "Seen In Movie")]
@@ -34,6 +34,7 @@ namespace MovieVehicles.Models
         public string Status { get; set; }
 
         [Required]
+        [Display(Name = "Vehicle Name")]
         public int VehicleID { get; set; }
 
         [Required]

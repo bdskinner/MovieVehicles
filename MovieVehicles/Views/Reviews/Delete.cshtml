@@ -1,4 +1,5 @@
-﻿@model MovieVehicles.Models.Review
+﻿@*@model MovieVehicles.Models.Review*@
+@model MovieVehicles.ViewModels.ReviewVM
 
 @{
     ViewBag.Title = "Delete";
@@ -52,11 +53,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.VehicleID)
+            @Html.DisplayNameFor(model => model.VehicleName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VehicleID)
+            @Html.DisplayFor(model => model.VehicleName)
         </dd>
 
     </dl>

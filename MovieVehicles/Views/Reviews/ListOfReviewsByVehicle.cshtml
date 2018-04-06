@@ -1,0 +1,30 @@
+﻿@*@model MovieVehicles.Models.Review*@
+@model IEnumerable<MovieVehicles.Models.Review>
+
+@{
+    ViewBag.Title = "Vehicle Reviews";
+
+    //Cast
+    var vehicle = (MovieVehicles.Models.Vehicle)ViewBag.Vehicle;
+}
+
+<h2>Vehicle Reviews for @vehicle.VehicleName</h2>
+
+<table class="table">
+
+    @foreach(var review in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => review.ReviewDate)
+                @Html.DisplayFor(modelItem => review.ReviewTitle)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Add a Review", "UserCreate", "Reviews", new { vehicleID = vehicle.VehicleID }, null)
+<br />
+@Html.ActionLink("Return to Vehicle List", "Index", "Vehicles")
+

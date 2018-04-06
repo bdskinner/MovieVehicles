@@ -9,18 +9,194 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieVehicles.Models;
+using MovieVehicles.ViewModels;
 using System.Collections.Generic;
+using System.Net;
+using System.Data.Entity;
 
 namespace MovieVehicles.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        [HttpGet]
+        public ActionResult Index()
+        {
+            //Variable Declarations.
+            var db = new ApplicationDbContext();
+            var users = db.Users;
+            var model = new List<EditUserVM>();
+
+            //Build a list of users.
+            foreach (var user in users)
+            {
+                var u = new EditUserVM(user);
+                model.Add(u);
+            }
+
+            //Return the view.
+            return View(model);
+        }
+
         public AccountController()
         {
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Username, LastName, FirstName, Email, City, State")] CreateUserVM user)
+        {
+            //Variable Declarations.
+            var db = new ApplicationDbContext();
+            var newUser = new ApplicationUser();
+
+            //Check the state of the model.
+            if (ModelState.IsValid)
+            {
+                //Get the information for the new user.
+                newUser.UserName = user.UserName;
+                newUser.FirstName = user.FirstName;
+                newUser.LastName = user.LastName;
+                newUser.City = user.City;
+                newUser.State = user.State;
+                newUser.Email = user.Email;
+
+                //Add the new user to the database.
+                db.Users.Add(newUser);
+                db.SaveChanges();
+
+                //Go back to the list of users.
+                return Redirect("Index");
+            }
+
+            //Return the the Create New User screen.
+            return View(user);
+        }
+
+        public ActionResult Details(string userName = null)
+        {
+            //Variable Declarations.
+            var db = new ApplicationDbContext();
+            var user = (from u in db.Users
+                        where u.UserName == userName
+                        select u).FirstOrDefault();
+            var model = new EditUserVM(user);
+
+            //Check to see if any user information was found.
+            if (user == null)
+            {
+                //If no user information was found then display an error message to the user.
+                return HttpNotFound();
+            }
+
+            //Return the view.
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(string userName = null)
+        {
+            //Variable Declarations.
+            var db = new ApplicationDbContext();
+            var user = (from u in db.Users
+                        where u.UserName == userName
+                        select u).FirstOrDefault();
+            var model = new EditUserVM(user);
+
+            //If no user information was found display an error message to the user.
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            //Return the view.
+            return View(model);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(string userName = null)
+        {
+            //Variable Declarations.
+            var db = new ApplicationDbContext();
+            var user = (from u in db.Users
+                        where u.UserName == userName
+                        select u).FirstOrDefault();
+
+            //Removie the user information from the database.
+            db.Users.Remove(user);
+            db.SaveChanges();
+
+            //Return to the list of users.
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(string userName = null)
+        {
+            //Variable Declarations.
+            var db = new ApplicationDbContext();
+            var user = (from u in db.Users
+                        where u.UserName == userName
+                        select u).FirstOrDefault();
+            var model = new EditUserVM(user);
+
+            //If no value was passed for the userName paraameter display an error message to the user.
+            if (userName == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //If no user information was found display an error message to the user.
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            //Return the view.
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Username, LastName, FirstName, Email, City, State")] EditUserVM userModel)
+        {
+            //Variable Declarations.
+            var db = new ApplicationDbContext();
+            var user = (from u in db.Users
+                        where u.UserName == userModel.UserName
+                        select u).FirstOrDefault();
+
+            //Check the state of the model.
+            if (ModelState.IsValid)
+            {
+                //Get the information for the new user.
+                user.UserName = userModel.UserName;
+                user.FirstName = userModel.FirstName;
+                user.LastName = userModel.LastName;
+                user.City = userModel.City;
+                user.State = userModel.State;
+                user.Email = userModel.Email;
+
+                //Add the new user to the database.
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges(); 
+
+                //Go back to the list of users.
+                return Redirect("Index");
+            }
+
+            //Return the the Create New User screen.
+            return View(userModel);
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )

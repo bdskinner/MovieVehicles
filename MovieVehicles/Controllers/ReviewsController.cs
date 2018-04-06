@@ -22,20 +22,22 @@ namespace MovieVehicles.Controllers
 
             List<ReviewVM> ReviewVMlist = new List<ReviewVM>(); // to hold list of reviews
 
-            var reviewlist = (from r in db.Reviews
-                                join v in db.Vehicles on r.VehicleID equals v.VehicleID
-                                select new { r.ReviewID, r.ReviewTitle, r.ReviewDate, v.VehicleName}).ToList();
+            //var reviewlist = (from r in db.Reviews
+            //                    join v in db.Vehicles on r.VehicleID equals v.VehicleID
+            //                    select new { r.ReviewID, r.ReviewTitle, r.ReviewDate, v.VehicleName}).ToList();
 
-            //query getting data from database from joining two tables and storing data in customerlist
-            foreach (var item in reviewlist)
-            {
-                ReviewVM rvm = new ReviewVM(); // ViewModel
-                rvm.ReviewID = item.ReviewID;
-                rvm.ReviewTitle = item.ReviewTitle;
-                rvm.ReviewDate = item.ReviewDate;
-                rvm.VehicleName = item.VehicleName;
-                ReviewVMlist.Add(rvm);
-            }
+            ////query getting data from database from joining two tables and storing data in customerlist
+            //foreach (var item in reviewlist)
+            //{
+            //    ReviewVM rvm = new ReviewVM(); // ViewModel
+            //    rvm.ReviewID = item.ReviewID;
+            //    rvm.ReviewTitle = item.ReviewTitle;
+            //    rvm.ReviewDate = item.ReviewDate;
+            //    rvm.VehicleName = item.VehicleName;
+            //    ReviewVMlist.Add(rvm);
+            //}
+
+            ReviewVMlist = BuildVehicleViewModelList();
 
             switch (sortOrder)
             {
@@ -67,18 +69,18 @@ namespace MovieVehicles.Controllers
         public ActionResult Index(string searchTitle, string searchName)
         {
             //Variable Declarations.
+            List<ReviewVM> ReviewVMlist = new List<ReviewVM>();
             //IEnumerable<Review> reviews;
             //IEnumerable<Movie> movieResults = null;
             //int pageSize = 50;
             //int pageNumber = (page ?? 1);
-
-            List<ReviewVM> ReviewVMlist = new List<ReviewVM>(); // to hold list of reviews
-
+            
+            //Get the information for the reviews as well as the vehicle name the review is for from the database.
             var reviewlist = (from r in db.Reviews
                               join v in db.Vehicles on r.VehicleID equals v.VehicleID
                               select new { r.ReviewID, r.ReviewTitle, r.ReviewDate, v.VehicleName }).ToList();
 
-            //query getting data from database from joining two tables and storing data in customerlist
+            //Store the reviews data in reviewlist.
             foreach (var item in reviewlist)
             {
                 ReviewVM rvm = new ReviewVM(); // ViewModel
@@ -130,16 +132,31 @@ namespace MovieVehicles.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Review review = db.Reviews.Find(id);
+
+
+
+            ReviewVM vehicleReviewModel = BuildVehicleViewModel(review);
+
+
+
             if (review == null)
             {
                 return HttpNotFound();
             }
-            return View(review);
+            //return View(review);
+            return View(vehicleReviewModel);
         }
 
         // GET: Reviews/Create
         public ActionResult Create()
         {
+            //Build a list of vehicle ID and name values.
+            var vehicleList = (from v in db.Vehicles
+                               select v).ToList();
+
+            ViewBag.SelectVehicleList = new SelectList(vehicleList, "VehicleID", "VehicleName");
+            
+            //Return the view.
             return View();
         }
 
@@ -163,6 +180,12 @@ namespace MovieVehicles.Controllers
         // GET: Reviews/Edit/5
         public ActionResult Edit(int? id)
         {
+            //Build a list of vehicle ID and name values.
+            var vehicleList = (from v in db.Vehicles
+                               select v).ToList();
+
+            ViewBag.SelectVehicleList = new SelectList(vehicleList, "VehicleID", "VehicleName");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -199,11 +222,19 @@ namespace MovieVehicles.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Review review = db.Reviews.Find(id);
+
+
+
+            ReviewVM vehicleReviewModel = BuildVehicleViewModel(review);
+
+
+
             if (review == null)
             {
                 return HttpNotFound();
             }
-            return View(review);
+            //return View(review);
+            return View(vehicleReviewModel);
         }
 
         // POST: Reviews/Delete/5
@@ -224,6 +255,99 @@ namespace MovieVehicles.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ListOfReviewsByVehicle(int ID)
+        {
+            //Get a list of reviews associated with the vehicle who's id was passed in the ID parameter.
+            var reviewList = (from v in db.Reviews
+                              where v.VehicleID == ID
+                              select v).ToList();
+
+            //Get the vehicle information.
+            var vehicle = (from v in db.Vehicles
+                          where v.VehicleID == ID
+                          select v).SingleOrDefault();
+            ViewBag.Vehicle = vehicle;
+
+            //Check to see if any vehicle information was found.
+            if (vehicle != null)
+            {
+                //If the information was found...
+
+                return View(reviewList);
+            }
+            else
+            {
+                //If no information was found...
+
+                ViewBag.ErrorMessage = "Vehicle Not Found!!";
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult UserCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserCreate([Bind(Include = "ReviewID,FirstName,LastName,ReviewDate,ReviewText,ReviewTitle,VehicleID")] Review review)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Reviews.Add(review);
+                db.SaveChanges();
+                return RedirectToAction("ListOfReviewsByVehicle", new { id = review.VehicleID });
+            }
+
+            return View(review);
+        }
+
+
+
+        private ReviewVM BuildVehicleViewModel(Review review)
+        {
+            //Get the vehicle name for the review provided.
+            var vehicleName = from v in db.Vehicles
+                              where v.VehicleID == review.VehicleID
+                              select v.VehicleName;
+
+            //Return the vehicle name with the review information in a new view model.
+            return new ReviewVM()
+            {
+                ReviewID = review.ReviewID,
+                ReviewTitle = review.ReviewTitle,
+                ReviewDate = review.ReviewDate,
+                VehicleName = vehicleName.SingleOrDefault()
+            };
+        }
+
+        private List<ReviewVM> BuildVehicleViewModelList()
+        {
+            //Variable Declarations.
+            List<ReviewVM> ReviewVMlist = new List<ReviewVM>();
+
+            //Get the information for the reviews as well as the vehicle name the review is for from the database.
+            var reviewlist = (from r in db.Reviews
+                              join v in db.Vehicles on r.VehicleID equals v.VehicleID
+                              select new { r.ReviewID, r.ReviewTitle, r.ReviewDate, v.VehicleName }).ToList();
+
+            //Store the reviews data in reviewlist.
+            foreach (var item in reviewlist)
+            {
+                ReviewVM rvm = new ReviewVM(); // ViewModel
+                rvm.ReviewID = item.ReviewID;
+                rvm.ReviewTitle = item.ReviewTitle;
+                rvm.ReviewDate = item.ReviewDate;
+                rvm.VehicleName = item.VehicleName;
+                ReviewVMlist.Add(rvm);
+            }
+
+            //Return the list of Review View Models.
+            return ReviewVMlist;
         }
     }
 }

@@ -46,15 +46,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -202,6 +203,10 @@
     <Compile Include="Migrations\201803282153030_VehiclesModel1.Designer.cs">
       <DependentUpon>201803282153030_VehiclesModel1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804031502209_VehiclesModel2.cs" />
+    <Compile Include="Migrations\201804031502209_VehiclesModel2.Designer.cs">
+      <DependentUpon>201804031502209_VehiclesModel2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -212,6 +217,8 @@
     <Compile Include="Models\VehiclePhoto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CreateUserVM.cs" />
+    <Compile Include="ViewModels\EditUserVM.cs" />
     <Compile Include="ViewModels\ReviewVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -229,8 +236,10 @@
     <Content Include="js\slider.js" />
     <Content Include="Photos\BaTumbler_HD.jpg" />
     <Content Include="Photos\BullittMustang.jpg" />
+    <Content Include="Photos\GBBatmobile.jpg" />
     <Content Include="Photos\General_lee.jpg" />
     <Content Include="Photos\Herbie.jpg" />
+    <Content Include="Photos\imagecomingsoon.jpg" />
     <Content Include="Photos\lotuss1.jpg" />
     <Content Include="Photos\OriginalDelorean.png" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -305,6 +314,14 @@
     <Content Include="Views\Vehicles\Details.cshtml" />
     <Content Include="Views\Vehicles\Edit.cshtml" />
     <Content Include="Views\Vehicles\Index.cshtml" />
+    <Content Include="Views\Home\ApplicationAdministration.cshtml" />
+    <Content Include="Views\Reviews\ListOfReviewsByVehicle.cshtml" />
+    <Content Include="Views\Reviews\UserCreate.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -329,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803282153030_VehiclesModel1.resx">
       <DependentUpon>201803282153030_VehiclesModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031502209_VehiclesModel2.resx">
+      <DependentUpon>201804031502209_VehiclesModel2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
