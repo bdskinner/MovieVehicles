@@ -12,6 +12,7 @@ namespace MovieVehicles.Models
 
         [Required]
         [Display(Name = "Event Date")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime EventDate { get; set; }
 
         [Required]

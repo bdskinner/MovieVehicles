@@ -11,7 +11,7 @@ namespace MovieVehicles.Models
         #region FIELD(S)       
 
         [Required]
-        [Display(Name = "Reviewer Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
@@ -20,6 +20,7 @@ namespace MovieVehicles.Models
 
         [Required]
         [Display(Name = "Review Date")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime ReviewDate { get; set; }
 
         public int ReviewID { get; set; }

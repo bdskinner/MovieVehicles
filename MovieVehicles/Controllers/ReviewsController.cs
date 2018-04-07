@@ -18,24 +18,7 @@ namespace MovieVehicles.Controllers
         [HttpGet]
         public ActionResult Index(string sortOrder)
         {
-            //ApplicationDbContext orderdb = new ApplicationDbContext(); //dbcontect class
-
             List<ReviewVM> ReviewVMlist = new List<ReviewVM>(); // to hold list of reviews
-
-            //var reviewlist = (from r in db.Reviews
-            //                    join v in db.Vehicles on r.VehicleID equals v.VehicleID
-            //                    select new { r.ReviewID, r.ReviewTitle, r.ReviewDate, v.VehicleName}).ToList();
-
-            ////query getting data from database from joining two tables and storing data in customerlist
-            //foreach (var item in reviewlist)
-            //{
-            //    ReviewVM rvm = new ReviewVM(); // ViewModel
-            //    rvm.ReviewID = item.ReviewID;
-            //    rvm.ReviewTitle = item.ReviewTitle;
-            //    rvm.ReviewDate = item.ReviewDate;
-            //    rvm.VehicleName = item.VehicleName;
-            //    ReviewVMlist.Add(rvm);
-            //}
 
             ReviewVMlist = BuildVehicleViewModelList();
 
@@ -321,6 +304,9 @@ namespace MovieVehicles.Controllers
                 ReviewID = review.ReviewID,
                 ReviewTitle = review.ReviewTitle,
                 ReviewDate = review.ReviewDate,
+                FirstName = review.FirstName,
+                LastName = review.LastName,
+                ReviewText = review.ReviewText,
                 VehicleName = vehicleName.SingleOrDefault()
             };
         }

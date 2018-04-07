@@ -20,21 +20,6 @@
 <div class="slider">
     <div class="slide-viewer">
         <div class="slide-group">
-            @*<div class="slide slide-1">
-                <img src="../Photos/OriginalDelorean.png" alt="Delorean" style="width: 480px; height: 316px;">
-            </div>
-
-            <div class="slide slide-2">
-                <img src="../Photos/BullittMustang.jpg" alt="Delorean" style="width: 480px; height: 316px;">
-            </div>
-
-            <div class="slide slide-3">
-                <img src="../Photos/General_lee.jpg" alt="Echto 1" style="width: 475px; height: 316px;">
-            </div>
-
-            <div class="slide slide-4">
-                <img src="../Photos/lotuss1.jpg" alt="Submersible Lotus" style="width: 466px; height: 262px;">
-            </div>*@
 
             @foreach (var photo in ViewBag.SlideShowPhotos)
             {
@@ -42,6 +27,7 @@
                     <img src="../Photos/@photo" alt="Submersible Lotus" style="width: 466px; height: 262px;">
                 </div>
             }
+
         </div>
     </div>
     <div class="slide-buttons"></div>
