@@ -36,7 +36,7 @@ namespace MovieVehicles.Migrations
                     Description = "This modified version of a ford fiesta took John Velis on his big adventure through Empire, MI",
                     CreatedBy = "John E. Velis",
                     MovieTitle = "Johnny Vs Big Adventure",
-                    VehiclePhoto = "comingsoon.jpg",
+                    VehiclePhoto = "imagecomingsoon.jpg",
                     Status = "Housed in the Empire Movie Vehicle Museum.",
                     Make = "Ford",
                     Model = "Fiesta",
@@ -49,7 +49,7 @@ namespace MovieVehicles.Migrations
                     Description = "This modified version of a 1986 ford pinto took John Velis on his big adventure through Cedar, MI",
                     CreatedBy = "John E. Velis",
                     MovieTitle = "Johnny Vs Big Adventure: Johnny Goes East",
-                    VehiclePhoto = "comingsoon.jpg",
+                    VehiclePhoto = "imagecomingsoon.jpg",
                     Status = "Housed in the Empire Movie Vehicle Museum.",
                     Make = "Ford",
                     Model = "Pinto",
@@ -62,7 +62,7 @@ namespace MovieVehicles.Migrations
                     Description = "This modified version of a 1989 Mini Cooper took John Velis on his biggest adventure ever to Traverse City, MI",
                     CreatedBy = "John E. Velis",
                     MovieTitle = "Johnny Vs Big Adventure: Ride Johnny Ride",
-                    VehiclePhoto = "comingsoon.jpg",
+                    VehiclePhoto = "imagecomingsoon.jpg",
                     Status = "Housed in the Empire Movie Vehicle Museum.",
                     Make = "Mini",
                     Model = "Cooper",
@@ -77,7 +77,7 @@ namespace MovieVehicles.Migrations
                     Description = "Doc Brown's Time Machine went through several variations before settling on a stock 1981 Delorean DMC-12 which was modified during production of the first Back to the Future.   movie.  Equipment was added to the back of the vehicle as well as the vents for exhaust.  Switches, circuits, and panels were added to the interior as well for the time travel electronics.",
                     CreatedBy = "Andrew Probert ,Ron Cobb",
                     MovieTitle = "Back to the Future",
-                    VehiclePhoto = "OriginalDelorean.jpg",
+                    VehiclePhoto = "OriginalDelorean.png",
                     Status = "Universal Studios permanently loans the film's iconic DMC-12 to L.A.'s Petersen Automotive Museum. The DeLorean that teleported Michael J. Fox in the first installment of the Back to the Future trilogy was unveiled at an event at the Petersen Automotive Museum in Los Angeles Wednesday evening.",
                     Make = "Delorean",
                     Model = "DMC-12",
@@ -90,7 +90,7 @@ namespace MovieVehicles.Migrations
                     Description = "This stock 1968 Ford Mustang GT390 was driven in the movie by Steve McQueen, including in the famous car chase.",
                     CreatedBy = "Ford Motor Co.",
                     MovieTitle = "Bullitt",
-                    VehiclePhoto = "BuliittMustang.jpg",
+                    VehiclePhoto = "BullittMustang.jpg",
                     Status = "Owned by a private owner (Robert Kiernan Jr.)",
                     Make = "Ford",
                     Model = "Mustang GT390",
@@ -131,8 +131,8 @@ namespace MovieVehicles.Migrations
                     MovieTitle = "Batman Begins",
                     VehiclePhoto = "BaTumbler_HD.jpg",
                     Status = "Unknown",
-                    Make = "Unknown",
-                    Model = "Unknown",
+                    Make = "None",
+                    Model = "None",
                     Year = 2005
                 },
 
@@ -160,6 +160,97 @@ namespace MovieVehicles.Migrations
                     Make = "Lincoln",
                     Model = "Futura",
                     Year = 1955
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Tim Burton's Batmobile",
+                    Description = "The Batmobile was built upon a Chevrolet Impala chasis with a Chevy V8 engine, and was based on and modified from a 1970 Corvette body when previous development with a Jaguar and Ford Mustang failed. A second car was based on an Oldsmobile Cutlass Convertible.  All gadgets (aside from the Cocoon-mode) on the Batmobile in both movies were fully functional, although the exhaust after-burner could only run for 15 seconds at a time due to the amount of fuel that it consumed.",
+                    CreatedBy = "Anton Furst, Tim Burton, Terry Ackland-Snow, John Eveans, Keith Short",
+                    MovieTitle = "Batman",
+                    VehiclePhoto = "TBBatmobile.gif",
+                    Status = "Unknown",
+                    Make = "Chevy",
+                    Model = "Impala",
+                    Year = 1970
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Bandit Trans Am",
+                    Description = "After seeing an advertisement for the soon-to-be-released 1977 Pontiac Trans Am director Hal Needham knew right away that would be the Bandit's car, or, as Needham referred to it, a character in the movie. He contacted Pontiac and an agreement was made that four 1977 Trans Ams would be provided for the movie. The Trans Ams were actually 1976-model cars with 1977 front ends. (From 1970 to 1976, both the Firebird/Trans Am and Chevrolet Camaro had two round headlights, and in 1977, the Firebird/Trans Am was changed to four square headlights, while the Camaro remained unchanged.) The decals were also changed to 1977-style units, as evidenced by the engine size callouts on the hood scoop being in liters rather than cubic inches, as had been the case in 1976.",
+                    CreatedBy = "Pontiac",
+                    MovieTitle = "Smokey and the Bandits",
+                    VehiclePhoto = "BanditTransAm.jpg",
+                    Status = "Destroyed in production of the movie.",
+                    Make = "Pontiac",
+                    Model = "Trans Am",
+                    Year = 1977
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Ecto-1",
+                    Description = "This modified Cadillac Miller-Meteor Futura Ambulance/Hearse Combination was used in the Ghostbusters and Ghostbusters 2 movies.  The vehicle used for the Ecto-1 was a 1959 Cadillac professional chassis, built by the Miller-Meteor company.  Stephen Dane is credited as a Hardware Consultant for the movies and was the fabricator of the original Ectomobile.",
+                    CreatedBy = "Miller-Meteor",
+                    MovieTitle = "Ghostbusters",
+                    VehiclePhoto = "Ghostbusters-Ecto-1.jpg",
+                    Status = "On display in the Hollywood Gallery of the Petersen Automotive Museum in Los Angeles.",
+                    Make = "Cadillac",
+                    Model = "Miller-Meteor",
+                    Year = 1959
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "James Bond 1964 Aston Martin DB5",
+                    Description = "The Aston Martin DB5 is the most famous Aston Martin car due to its use by James Bond in Goldfinger (1964). The car used in the film was the original DB5 prototype, with another standard car used for stunts. Famous for its array of gadgets, the film's script initially had the car armed only with smoke screen. However, the gadgets rapidly increased as crew members began suggesting devices to install in it. For instance, director Guy Hamilton conceived the revolving license plate because he had been getting lots of parking tickets, while his stepson suggested the ejector seat (which he saw on television).",
+                    CreatedBy = "Aston Martin",
+                    MovieTitle = "Goldfinger",
+                    VehiclePhoto = "JB1964AstonMartinDB5.jpg",
+                    Status = "Unknown",
+                    Make = "Aston Martin",
+                    Model = "DB5",
+                    Year = 1964
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Chitty Chitty Bang Bang Car",
+                    Description = "Chitty Chitty Bang Bang is the vintage racing car which features in the book, musical film and stage production of the same name. Writer Ian Fleming took his inspiration for the car from a series of aero-engined racing cars built by Count Louis Zborowski in the early 1920s, christened Chitty Bang Bang.  This fully functional road-going car with UK registration GEN 11 was fitted with a Ford 3000 V6 engine and automatic transmission and allocated a genuine UK registration. ",
+                    CreatedBy = "Ken Adam, Frederick Rowland Emett, Alan Mann",
+                    MovieTitle = "Chitty Chitty Bang Bang",
+                    VehiclePhoto = "Chitty-1.jpg",
+                    Status = "Sold at auction to a private collector (Peter Jackson)",
+                    Make = "None",
+                    Model = "None",
+                    Year = 0
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "James Dean's Mercury",
+                    Description = "The car driven by James Dean in the movie, “Rebel Without A Cause,”   was a 49 Mercury.  Customized for the movie, the 49 Mercury was dechromed.  When the movie debuted, James Dean was already dead, and the movie inspired a new generation of teens to love this old classic.  In fact, the 1949 Mercury is considered by most to be one of the most famous movie cars in all time history. ",
+                    CreatedBy = "Mercury",
+                    MovieTitle = "Rebel Without a Cause",
+                    VehiclePhoto = "JamesDeanMercury.jpg",
+                    Status = "Dislayed at the National Automobile Museum in Reno, Nevada",
+                    Make = "Mercury",
+                    Model = "Series 9CM Coupe",
+                    Year = 1949
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Mad Max Interceptor",
+                    Description = "The vehicle started out as a standard white Australian built 1973 Ford Falcon XB GT Hardtop when in 1976, filmmakers Byron Kennedy and George Miller began preproduction on Mad Max. The movie's art director Jon Dowding designed the Interceptor and commissioned Melbourne-based car customizers Graf-X International to modify the GT Falcon. Peter Arcadipane, Ray Beckerley, John Evans, and painter Rod Smythe transformed the car as specified for the film.",
+                    CreatedBy = "Ford",
+                    MovieTitle = "Mad Max",
+                    VehiclePhoto = "MadMaxInterceptor.jpg",
+                    Status = "On display at the Miami Auto Museum",
+                    Make = "Ford",
+                    Model = "Falcon XB GT Coupe",
+                    Year = 1973
                 }
             );
 

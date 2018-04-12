@@ -173,7 +173,7 @@ namespace MovieVehicles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VehicleID,CreatedBy,Description,Make,Model,MoviePoster,MovieTitle,Status,VehicleName,Year")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "VehicleID,CreatedBy,Description,Make,Model,VehiclePhoto,MovieTitle,Status,VehicleName,Year")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {

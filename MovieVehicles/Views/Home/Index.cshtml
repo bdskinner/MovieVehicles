@@ -21,10 +21,19 @@
     <div class="slide-viewer">
         <div class="slide-group">
 
-            @foreach (var photo in ViewBag.SlideShowPhotos)
+            @*@foreach (var photo in ViewBag.SlideShowPhotos)
             {
                 <div class="slide slide-"@slideCntr>
                     <img src="../Photos/@photo" alt="Submersible Lotus" style="width: 466px; height: 262px;">
+                </div>
+            }*@
+
+            @foreach (var photo in ViewBag.SlideShowPhotos)
+            {
+                <div class="slide slide-" @slideCntr>
+                    <img src="../Photos/@photo.PhotoPath" alt="Submersible Lotus" style="display:block;margin:auto;width: 466px; height: 262px;">
+                    <br /><br />
+                    <p style="text-align:center">@photo.VehicleName</p>
                 </div>
             }
 

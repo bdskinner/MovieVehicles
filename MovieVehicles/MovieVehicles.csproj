@@ -46,11 +46,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdentityRoleController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="ViewModels\CreateUserVM.cs" />
     <Compile Include="ViewModels\EditUserVM.cs" />
     <Compile Include="ViewModels\ReviewVM.cs" />
+    <Compile Include="Views\RoleVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -234,13 +236,20 @@
     <Content Include="Content\Site.css" />
     <Content Include="js\jquery-1.11.0.min.js" />
     <Content Include="js\slider.js" />
+    <Content Include="Photos\BanditTransAm.jpg" />
     <Content Include="Photos\BaTumbler_HD.jpg" />
     <Content Include="Photos\BullittMustang.jpg" />
+    <Content Include="Photos\Chitty-1.jpg" />
     <Content Include="Photos\GBBatmobile.jpg" />
     <Content Include="Photos\General_lee.jpg" />
+    <Content Include="Photos\Ghostbusters-Ecto-1.jpg" />
     <Content Include="Photos\Herbie.jpg" />
     <Content Include="Photos\imagecomingsoon.jpg" />
+    <Content Include="Photos\JamesDeanMercury.jpg" />
+    <Content Include="Photos\JB1964AstonMartinDB5.jpg" />
+    <Content Include="Photos\KITT.jpg" />
     <Content Include="Photos\lotuss1.jpg" />
+    <Content Include="Photos\MadMaxInterceptor.jpg" />
     <Content Include="Photos\OriginalDelorean.png" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -250,6 +259,7 @@
     <None Include="Properties\PublishProfiles\LimelightMovieVehiclesDB - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\LimelightMovieVehiclesDB - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
+    <Content Include="Photos\TBBatmobile.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -322,6 +332,13 @@
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\IdentityRole\Index.cshtml" />
+    <Content Include="Views\IdentityRole\Details.cshtml" />
+    <Content Include="Views\IdentityRole\Create.cshtml" />
+    <Content Include="Views\IdentityRole\Edit.cshtml" />
+    <Content Include="Views\IdentityRole\Delete.cshtml" />
+    <Content Include="Views\Account\ViewUsersRoles.cshtml" />
+    <Content Include="Views\Account\AddRoleToUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,7 +30,7 @@ namespace MovieVehicles.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("MovieVehiclesDB_Local", throwIfV1Schema: false)
+            : base("MovieVehiclesDB_Remote", throwIfV1Schema: false)
         {
         }
 
@@ -43,6 +43,8 @@ namespace MovieVehicles.Models
 
         public DbSet<Review> Reviews { get; set; }
 
-        public DbSet<Event> Events { get; set; }        
+        public DbSet<Event> Events { get; set; }
+
+        public System.Data.Entity.DbSet<MovieVehicles.Views.RoleVM> RoleVMs { get; set; }
     }
 }

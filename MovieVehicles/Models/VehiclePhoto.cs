@@ -9,17 +9,19 @@ namespace MovieVehicles.Models
     {
         #region FIELD(S)             
 
-        public int PhotoID { get; set; }
-
         public string PhotoPath { get; set; }
 
-        public int VehicleID { get; set; }
+        public string VehicleName { get; set; }
 
         #endregion
 
         #region CONSTRUCTOR(S)
 
-
+        public VehiclePhoto(string photoPath, string vehicleName)
+        {
+            PhotoPath = photoPath;
+            VehicleName = vehicleName;
+        }
 
         #endregion
 

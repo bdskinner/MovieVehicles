@@ -29,12 +29,32 @@ namespace MovieVehicles.Controllers
             ViewBag.TopFiveReviews = topFiveReviews.ToList();
 
             //Get the photo names and file paths.
-            var photoList = (from p in db.Vehicles
-                             where p.VehiclePhoto != "imagecomingsoon.jpg"
-                             select p.VehiclePhoto).ToList();
+            //var photoList = (from p in db.Vehicles
+            //                 where p.VehiclePhoto != "imagecomingsoon.jpg"
+            //                 select p.VehiclePhoto).ToList();
 
-            //Add the photo paths for the slideshow to the ViewBag.
-            ViewBag.SlideShowPhotos = photoList.ToList();
+            ////Add the photo paths for the slideshow to the ViewBag.
+            //ViewBag.SlideShowPhotos = photoList.ToList();
+
+
+
+
+
+
+            var photoList2 = (from p in db.Vehicles
+                              where p.VehiclePhoto != "imagecomingsoon.jpg"
+                              select new { p.VehiclePhoto, p.VehicleName }).ToList();
+            List<VehiclePhoto> vehiclePhotoList = new List<VehiclePhoto>();
+            foreach (var photo in photoList2)
+            {
+                VehiclePhoto newVehiclePhoto = new VehiclePhoto(photo.VehiclePhoto, photo.VehicleName);
+                vehiclePhotoList.Add(newVehiclePhoto);
+            }
+            ViewBag.SlideShowPhotos = vehiclePhotoList;
+
+
+
+
 
             //Dislay the view.
             return View(topFiveEvents.ToList());
