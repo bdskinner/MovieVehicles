@@ -19,12 +19,26 @@
                 @Html.DisplayFor(modelItem => review.ReviewDate)
                 @Html.DisplayFor(modelItem => review.ReviewTitle)
             </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = review.ReviewID })
+            </td>
         </tr>
     }
 
 </table>
 
-@Html.ActionLink("Add a Review", "UserCreate", "Reviews", new { vehicleID = vehicle.VehicleID }, null)
+
+
+
+@if (User.IsInRole("Site Administrator") || User.IsInRole("Subscriber"))
+{
+    @Html.ActionLink("Add a Review", "UserCreate", "Reviews", new { vehicleID = vehicle.VehicleID }, null)
+}
+
+
+
+@*@Html.ActionLink("Add a Review", "UserCreate", "Reviews", new { vehicleID = vehicle.VehicleID }, null)*@
 <br />
 @Html.ActionLink("Return to Vehicle List", "Index", "Vehicles")
 

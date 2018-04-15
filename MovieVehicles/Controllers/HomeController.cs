@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MovieVehicles.Models;
+using MovieVehicles.CustomAttributes;
 
 namespace MovieVehicles.Controllers
 {
@@ -67,6 +68,7 @@ namespace MovieVehicles.Controllers
             return View();
         }
 
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Admin()
         {
             return View("ApplicationAdministration");

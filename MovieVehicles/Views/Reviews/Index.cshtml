@@ -45,7 +45,12 @@
 
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @*@Html.ActionLink("Create New", "Create")*@
+
+    @if (User.IsInRole("Site Administrator") || User.IsInRole("Subscriber"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
 </p>
 <table class="table">
     <tr>
@@ -80,9 +85,24 @@
             @Html.DisplayFor(modelItem => item.VehicleName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReviewID }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ReviewID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ReviewID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReviewID })
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReviewID })*@
+
+
+
+            @if (User.IsInRole("Site Administrator"))
+            {
+                @Html.ActionLink("Edit | ", "Edit", new { id = item.ReviewID }) 
+                @Html.ActionLink("Details | ", "Details", new { id = item.ReviewID }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.ReviewID })
+            }
+            else
+            {
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.ReviewID }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.ReviewID }) 
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.ReviewID })*@
+            }
         </td>
     </tr>
 }

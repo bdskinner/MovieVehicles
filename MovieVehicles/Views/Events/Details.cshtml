@@ -60,6 +60,19 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EventID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.EventID }) |
+    @Html.ActionLink("Back to List", "Index")*@
+
+
+
+    @if (User.IsInRole("Site Administrator"))
+    {
+        @Html.ActionLink("Edit | ", "Edit", new { id = Model.EventID }) 
+        @Html.ActionLink("Back to List", "Index")
+    }
+    else
+    {
+        @*@Html.ActionLink("Edit", "Edit", new { id = Model.EventID }) |*@
+        @Html.ActionLink("Back to List", "Index")
+    }
 </p>

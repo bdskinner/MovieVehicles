@@ -7,6 +7,7 @@ using MovieVehicles.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Net;
 using System.Data.Entity;
+using MovieVehicles.CustomAttributes;
 
 namespace MovieVehicles.Controllers
 {
@@ -26,6 +27,7 @@ namespace MovieVehicles.Controllers
             return View();
         }
 
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Create([Bind(Include = "ID,Name")] IdentityRole role)
         {
             if (ModelState.IsValid)
@@ -39,6 +41,7 @@ namespace MovieVehicles.Controllers
         }
 
         [HttpGet]
+        [AuthorizationOrRedirect(Roles = "Site Administrator, Subscriber")]
         public ActionResult Delete(string ID)
         {
             if (ID == null)
@@ -58,6 +61,7 @@ namespace MovieVehicles.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult DeleteConfirm(string ID)
         {
             IdentityRole identityRoleTemp = db.Roles.Find(ID);
@@ -84,6 +88,7 @@ namespace MovieVehicles.Controllers
         }
 
         [HttpGet]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Edit(string ID)
         {
             if (ID == null)
@@ -103,6 +108,7 @@ namespace MovieVehicles.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Edit([Bind(Include = "ID,Name")] IdentityRole role)
         {
             if (ModelState.IsValid)

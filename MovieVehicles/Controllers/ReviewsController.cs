@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MovieVehicles.Models;
 using MovieVehicles.ViewModels;
+using MovieVehicles.CustomAttributes;
 
 namespace MovieVehicles.Controllers
 {
@@ -119,6 +120,7 @@ namespace MovieVehicles.Controllers
 
 
             ReviewVM vehicleReviewModel = BuildVehicleViewModel(review);
+            
 
 
 
@@ -131,6 +133,7 @@ namespace MovieVehicles.Controllers
         }
 
         // GET: Reviews/Create
+        [AuthorizationOrRedirect(Roles = "Site Administrator, Subscriber")]
         public ActionResult Create()
         {
             //Build a list of vehicle ID and name values.
@@ -148,6 +151,7 @@ namespace MovieVehicles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizationOrRedirect(Roles = "Site Administrator, Subscriber")]
         public ActionResult Create([Bind(Include = "ReviewID,FirstName,LastName,ReviewDate,ReviewText,ReviewTitle,VehicleID")] Review review)
         {
             if (ModelState.IsValid)
@@ -161,6 +165,7 @@ namespace MovieVehicles.Controllers
         }
 
         // GET: Reviews/Edit/5
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Edit(int? id)
         {
             //Build a list of vehicle ID and name values.
@@ -186,6 +191,7 @@ namespace MovieVehicles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Edit([Bind(Include = "ReviewID,FirstName,LastName,ReviewDate,ReviewText,ReviewTitle,VehicleID")] Review review)
         {
             if (ModelState.IsValid)
@@ -198,6 +204,7 @@ namespace MovieVehicles.Controllers
         }
 
         // GET: Reviews/Delete/5
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -223,6 +230,7 @@ namespace MovieVehicles.Controllers
         // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Review review = db.Reviews.Find(id);

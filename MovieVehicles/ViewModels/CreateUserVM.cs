@@ -24,17 +24,17 @@ namespace MovieVehicles.ViewModels
             this.City = user.City;
             this.State = user.State;
             this.Email = user.Email;
+            this.Password = user.PasswordHash;
         }
 
         #endregion
 
         #region PROPERTIES 
 
+        [Key]
         [Required]
-        public string City { get; set; }
-
-        [Required]
-        public string Email { get; set; }
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "First Name")]
@@ -45,13 +45,24 @@ namespace MovieVehicles.ViewModels
         public string LastName { get; set; }
 
         [Required]
-        public string State { get; set; }
+        public string Email { get; set; }
 
-        [Key]
         [Required]
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
+        public string City { get; set; }
 
+        [Required]
+        public string State { get; set; }
+        
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        public string ConfirmPassword { get; set; }
+        
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+        
         #endregion
     }
 }

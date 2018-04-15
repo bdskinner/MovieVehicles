@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MovieVehicles.Models;
+using MovieVehicles.CustomAttributes;
 
 namespace MovieVehicles.Controllers
 {
@@ -131,6 +132,7 @@ namespace MovieVehicles.Controllers
         }
 
         // GET: Vehicles/Create
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -154,6 +156,7 @@ namespace MovieVehicles.Controllers
         }
 
         // GET: Vehicles/Edit/5
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -173,6 +176,7 @@ namespace MovieVehicles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Edit([Bind(Include = "VehicleID,CreatedBy,Description,Make,Model,VehiclePhoto,MovieTitle,Status,VehicleName,Year")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
@@ -185,6 +189,7 @@ namespace MovieVehicles.Controllers
         }
 
         // GET: Vehicles/Delete/5
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -202,6 +207,7 @@ namespace MovieVehicles.Controllers
         // POST: Vehicles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Vehicle vehicle = db.Vehicles.Find(id);

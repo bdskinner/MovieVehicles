@@ -14,16 +14,18 @@ using System.Collections.Generic;
 using System.Net;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MovieVehicles.CustomAttributes;
 
 namespace MovieVehicles.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         [HttpGet]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Index()
         {
             //Variable Declarations.
@@ -47,6 +49,7 @@ namespace MovieVehicles.Controllers
         }
 
         [HttpGet]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -54,35 +57,47 @@ namespace MovieVehicles.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Username, LastName, FirstName, Email, City, State")] CreateUserVM user)
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
+        public async Task<ActionResult> Create([Bind(Include = "Username, LastName, FirstName, Email, City, State, Password, ConfirmPassword")] CreateUserVM user)
         {
             //Variable Declarations.
             var db = new ApplicationDbContext();
-            var newUser = new ApplicationUser();
 
             //Check the state of the model.
             if (ModelState.IsValid)
             {
+                var newUser = new ApplicationUser();
+
                 //Get the information for the new user.
-                newUser.UserName = user.UserName;
+                newUser.UserName = user.Email;  //user.UserName;
                 newUser.FirstName = user.FirstName;
                 newUser.LastName = user.LastName;
                 newUser.City = user.City;
                 newUser.State = user.State;
                 newUser.Email = user.Email;
 
-                //Add the new user to the database.
-                db.Users.Add(newUser);
-                db.SaveChanges();
+                //Add the new user information to the database.
+                var result = await UserManager.CreateAsync(newUser);
 
-                //Go back to the list of users.
-                return Redirect("Index");
+                //If the user information is added successfully to the database convert the password to hashcode 
+                //and save to to the database with the new user information.
+                if (result.Succeeded == true)
+                {
+                    PasswordHasher ph = new PasswordHasher();
+                    newUser.PasswordHash = ph.HashPassword(user.Password);
+                    UserManager.AddToRole(newUser.Id, "Guest");
+                    return RedirectToAction("Index", "Account");
+                }
+
+                //Record any errors that occured
+                AddErrors(result);
             }
-
+            
             //Return the the Create New User screen.
             return View(user);
         }
 
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Details(string userName = null)
         {
             //Variable Declarations.
@@ -104,6 +119,7 @@ namespace MovieVehicles.Controllers
         }
 
         [HttpGet]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Delete(string userName = null)
         {
             //Variable Declarations.
@@ -125,6 +141,7 @@ namespace MovieVehicles.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Delete")]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult DeleteConfirmed(string userName = null)
         {
             //Variable Declarations.
@@ -142,6 +159,7 @@ namespace MovieVehicles.Controllers
         }
 
         [HttpGet]
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Edit(string userName = null)
         {
             //Variable Declarations.
@@ -169,7 +187,8 @@ namespace MovieVehicles.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Username, LastName, FirstName, Email, City, State")] EditUserVM userModel)
+        [AuthorizationOrRedirect(Roles = "Site Administrator")]
+        public ActionResult Edit([Bind(Include = "Username, LastName, FirstName, Email, City, State, Password, ConfirmPassword")] EditUserVM userModel)
         {
             //Variable Declarations.
             var db = new ApplicationDbContext();
@@ -187,6 +206,11 @@ namespace MovieVehicles.Controllers
                 user.City = userModel.City;
                 user.State = userModel.State;
                 user.Email = userModel.Email;
+                if (userModel != null)
+                {
+                    PasswordHasher ph = new PasswordHasher();
+                    user.PasswordHash = ph.HashPassword(userModel.Password);
+                }
 
                 //Add the new user to the database.
                 db.Entry(user).State = EntityState.Modified;

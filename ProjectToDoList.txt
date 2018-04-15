@@ -3,8 +3,7 @@ To Do List
 
 
 General Functionality
-* Get file paths for photos for photo slide show on landing page from db.
-* Only display date (not date/time) of events and reviews on the main page
+* 
 
 Review Functionality
 * Create ModelView for Review Detail page to include Vehicle Name instead of vehicle id
@@ -16,4 +15,11 @@ Event Functionality
 * Put state dropdown list on Event Edit page instead of textbox to edit event state.
 
 Vehicle Functionality
-* Put Photo of vehicle on detail page
+* 
+
+Create User Functionality
+* Add dropdown list for state abbrievations instead of textbox.
+
+Edit User Functionality
+* Add dropdown list for state abbrievations instead of textbox.
+
