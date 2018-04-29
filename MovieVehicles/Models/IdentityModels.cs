@@ -30,7 +30,7 @@ namespace MovieVehicles.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("MovieVehiclesDB_Remote", throwIfV1Schema: false)
+            : base("MovieVehiclesDB_Local", throwIfV1Schema: false)
         {
         }
 

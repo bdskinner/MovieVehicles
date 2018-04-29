@@ -69,6 +69,7 @@ Azure Information
 App Name: LimelightMovieVehiclesDB
 Azure URL: http://limelightmovievehiclesdb.azurewebsites.net
 Github Repo URL: https://github.com/bdskinner/MovieVehicles
+Video Presentation URL: http://www.screencast.com/t/Vz467VV1O4
 
 Server Name: cit218skinner.database.windows.net
 SQL Server DB Name: MovieVehiclesDB

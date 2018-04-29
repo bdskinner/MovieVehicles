@@ -248,6 +248,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\camera.png" />
     <Content Include="Images\default-user.png" />
+    <Content Include="Images\events.png" />
     <Content Include="Images\movie-reels-and-popcorn.png" />
     <Content Include="Images\pen.png" />
     <Content Include="Images\roles.png" />
