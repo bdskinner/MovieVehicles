@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MovieVehicles.Models;
 using MovieVehicles.ViewModels;
 using MovieVehicles.CustomAttributes;
+using PagedList;
 
 namespace MovieVehicles.Controllers
 {
@@ -17,32 +18,38 @@ namespace MovieVehicles.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, int? page)
         {
-            List<ReviewVM> ReviewVMlist = new List<ReviewVM>(); // to hold list of reviews
+            //Variable Declarations.
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+            //List<ReviewVM> ReviewVMlist = new List<ReviewVM>(); // to hold list of reviews
+            IEnumerable<ReviewVM> ReviewVMlist = null; // to hold list of reviews
 
-            ReviewVMlist = BuildVehicleViewModelList();
+            //ReviewVMlist = BuildVehicleViewModelList();       //Original statement
+            ReviewVMlist = (IEnumerable<ReviewVM>)BuildVehicleViewModelList();
 
             switch (sortOrder)
             {
                 case "Date":
                     ReviewVMlist = (from r in ReviewVMlist
                                   orderby r.ReviewDate ascending
-                                  select r).ToList();
+                                  select r).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
                 case "VehicleName":
                     ReviewVMlist = (from r in ReviewVMlist
                                   orderby r.VehicleName ascending
-                                  select r).ToList();
+                                  select r).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
                 default:
                     ReviewVMlist = (from r in ReviewVMlist
                                     orderby r.ReviewTitle ascending
-                                  select r).ToList();
+                                  select r).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
             }
 
-            return View((IList<ReviewVM>)ReviewVMlist);
+            //return View((IList<ReviewVM>)ReviewVMlist);
+            return View(ReviewVMlist);
 
 
             //return View(db.Reviews.ToList());
@@ -156,6 +163,7 @@ namespace MovieVehicles.Controllers
         {
             if (ModelState.IsValid)
             {
+                review.ReviewDate = DateTime.Now;
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -248,18 +256,55 @@ namespace MovieVehicles.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ListOfReviewsByVehicle(int ID)
+        public ActionResult ListOfReviewsByVehicle(int ID, string sortOrder, int? page)
         {
+            //Variable Declarations.
+            int pageNumber = (page ?? 1);
+            int pageSize = 1;
+
             //Get a list of reviews associated with the vehicle who's id was passed in the ID parameter.
-            var reviewList = (from v in db.Reviews
-                              where v.VehicleID == ID
-                              select v).ToList();
+            //var reviewList = (from v in db.Reviews            //original statement
+            //                  where v.VehicleID == ID
+            //                  select v).ToList();
+
+            IEnumerable<Review> reviewList = (from v in db.Reviews
+                                where v.VehicleID == ID
+                                select v);    //.ToList();
+
+
 
             //Get the vehicle information.
             var vehicle = (from v in db.Vehicles
                           where v.VehicleID == ID
                           select v).SingleOrDefault();
             ViewBag.Vehicle = vehicle;
+
+
+
+
+
+            //Sort the review list by the column the user selected.
+            switch (sortOrder)
+            {
+                case "Date":
+                    reviewList = (from r in reviewList
+                                  orderby r.ReviewDate ascending
+                                    select r).ToPagedList(pageNumber, pageSize);    //.ToList();
+                    break;
+                case "Title":
+                    reviewList = (from r in reviewList
+                                  orderby r.ReviewTitle ascending
+                                  select r).ToPagedList(pageNumber, pageSize);    //.ToList();
+                    break;
+                default:
+                    reviewList = (from r in reviewList
+                                    orderby r.ReviewTitle ascending
+                                    select r).ToPagedList(pageNumber, pageSize);    //.ToList();
+                    break;
+            }
+
+
+
 
             //Check to see if any vehicle information was found.
             if (vehicle != null)

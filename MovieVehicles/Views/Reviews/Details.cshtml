@@ -78,11 +78,15 @@
     @if (User.IsInRole("Site Administrator"))
     {
         @Html.ActionLink("Edit | ", "Edit", new { id = Model.ReviewID }) 
-        @Html.ActionLink("Back to List", "Index")
-        }
-        else
-        {
+        @*@Html.ActionLink("Back to List", "Index")*@
+
+        <a href="javascript:void(0);" onclick="history.go(-1);">Back to Details</a>
+    }
+    else
+    {
         @*@Html.ActionLink("Edit", "Edit", new { id = Model.ReviewID }) |*@
-        @Html.ActionLink("Back to List", "Index")
+        @*@Html.ActionLink("Back to List", "Index")*@
+
+        <a href="javascript:void(0);" onclick="history.go(-1);">Back to Details</a>
     }
 </p>

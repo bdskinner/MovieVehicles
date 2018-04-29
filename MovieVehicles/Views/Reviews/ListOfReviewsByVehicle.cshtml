@@ -1,23 +1,50 @@
 ﻿@*@model MovieVehicles.Models.Review*@
 @model IEnumerable<MovieVehicles.Models.Review>
 
+@using PagedList;
+@using PagedList.Mvc;
+
 @{
     ViewBag.Title = "Vehicle Reviews";
 
     //Cast
     var vehicle = (MovieVehicles.Models.Vehicle)ViewBag.Vehicle;
+    var pagedList = (IPagedList)Model;
 }
 
+<br />
 <h2>Vehicle Reviews for @vehicle.VehicleName</h2>
+<br /><br />
+
+
+
+
+Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
+@Html.PagedListPager(pagedList, page => Url.Action("ListOfReviewsByVehicle", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+
 
 <table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Review Title", "ListOfReviewsByVehicle", new { sortOrder = "Title" })
+        </th>
+        <th>
+            @Html.ActionLink("Review Date", "ListOfReviewsByVehicle", new { sortOrder = "Date" })
+        </th>
+        <th></th>
+    </tr>
 
     @foreach(var review in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => review.ReviewDate)
                 @Html.DisplayFor(modelItem => review.ReviewTitle)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => review.ReviewDate)
             </td>
 
             <td>
@@ -28,17 +55,11 @@
 
 </table>
 
-
-
-
 @if (User.IsInRole("Site Administrator") || User.IsInRole("Subscriber"))
 {
     @Html.ActionLink("Add a Review", "UserCreate", "Reviews", new { vehicleID = vehicle.VehicleID }, null)
 }
 
-
-
-@*@Html.ActionLink("Add a Review", "UserCreate", "Reviews", new { vehicleID = vehicle.VehicleID }, null)*@
 <br />
 @Html.ActionLink("Return to Vehicle List", "Index", "Vehicles")
 

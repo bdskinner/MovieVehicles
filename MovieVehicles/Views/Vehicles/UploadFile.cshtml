@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "UploadPhoto";
+
+    //Code Found At...
+    //Site Name: c-sharpcorner.com
+    //URL: https://www.c-sharpcorner.com/article/upload-files-in-asp-net-mvc-5/
+}
+
+<br /><br />
+<h2>Upload Vehicle Photo</h2>
+<br />
+
+@using (Html.BeginForm("UploadFile", "Vehicles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        @Html.TextBox("file", "", new { type = "file" }) <br />
+
+        <input type="submit" value="Upload" />
+
+        @ViewBag.Message
+
+    </div>
+
+    <br /><br /><br />
+    @Html.ActionLink("Back to Admin Menu", "Admin", "Home")
+}

@@ -52,6 +52,10 @@ namespace MovieVehicles.Controllers
         [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Create()
         {
+            //Get a list of states.
+            var StateAbbr = Enum.GetValues(typeof(Enums.Enumerations.States)).OfType<Enums.Enumerations.States>().ToList();
+            ViewBag.States = StateAbbr.ToList();
+
             return View();
         }
 
@@ -168,6 +172,10 @@ namespace MovieVehicles.Controllers
                         where u.UserName == userName
                         select u).FirstOrDefault();
             var model = new EditUserVM(user);
+
+            //Get a list of states.
+            var StateAbbr = Enum.GetValues(typeof(Enums.Enumerations.States)).OfType<Enums.Enumerations.States>().ToList();
+            ViewBag.States = StateAbbr.ToList();
 
             //If no value was passed for the userName paraameter display an error message to the user.
             if (userName == null)

@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<MovieVehicles.Models.Vehicle>
 
+@using PagedList;
+@using PagedList.Mvc;
+
 @{
     ViewBag.Title = "Index";
+    var pagedList = (IPagedList)Model;
 }
 
 <br /><br />
@@ -45,6 +49,13 @@
         </div>
     </div>
 }
+
+
+
+
+Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
+@Html.PagedListPager(pagedList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
 
 
 
@@ -94,19 +105,24 @@
         <td>
             @if (User.IsInRole("Site Administrator"))
             {
+                //Links for the Site Administrator Role...
                 @Html.ActionLink("Edit | ", "Edit", new { id = item.VehicleID }) 
                 @Html.ActionLink("Details | ", "Details", new { id = item.VehicleID }) 
                 @Html.ActionLink("Delete | ", "Delete", new { id = item.VehicleID })
                 @Html.ActionLink("Reviews", "ListOfReviewsByVehicle", "Reviews", new { id = item.VehicleID }, null)
             }
-            else
+            else if (User.IsInRole("Subscriber"))
             {
-                @*@Html.ActionLink("Edit |", "Edit", new { id = item.VehicleID }) |*@
+                //Links for the Subscriber Role...
                 @Html.ActionLink("Details |", "Details", new { id = item.VehicleID })
-                @*@Html.ActionLink("Delete", "Delete", new { id = item.VehicleID }) |*@
                 @Html.ActionLink("Reviews", "ListOfReviewsByVehicle", "Reviews", new { id = item.VehicleID }, null)
             }
-            
+            else
+            {
+                //Links for the Guest Role or non-registered user...
+                @Html.ActionLink("Details", "Details", new { id = item.VehicleID })
+            }
+
         </td>
     </tr>
 }

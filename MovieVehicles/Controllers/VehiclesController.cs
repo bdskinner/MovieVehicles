@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using MovieVehicles.Models;
 using MovieVehicles.CustomAttributes;
+using PagedList;
+using System.IO;
 
 namespace MovieVehicles.Controllers
 {
@@ -22,12 +24,16 @@ namespace MovieVehicles.Controllers
             //Variable Declarations.
             //MovieRepository movieRepository = new MovieRepository();
             //IEnumerable<Movie> movies;
-            //int pageSize = 50;
-            //int pageNumber = (page ?? 1);
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+            
 
             //Get a list of the vehicles.
-            var vehicleList = (from v in db.Vehicles
-                              select v).ToList();
+            //var vehicleList = (from v in db.Vehicles      //original statement
+            //                   select v).ToList();
+
+            IEnumerable<Vehicle> vehicleList = (from v in db.Vehicles
+                                       select v);
 
             //Sort the records.
             switch (sortOrder)
@@ -35,26 +41,31 @@ namespace MovieVehicles.Controllers
                 case "CreatedBy":
                     vehicleList = (from v in vehicleList
                                   orderby v.CreatedBy ascending
-                                  select v).ToList();
+                                  select v).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
                 case "Title":
                     vehicleList = (from v in vehicleList
                                    orderby v.MovieTitle ascending
-                                   select v).ToList();
+                                   select v).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
                 default:
                     //If no sort order is specified sort by the vehicle's name.
                     vehicleList = (from v in vehicleList
                                    orderby v.VehicleName ascending
-                                   select v).ToList();
+                                   select v).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
             }
 
             //Set Paginate settings.
             //movies = movies.ToPagedList(pageNumber, pageSize);
+            //vehicleList = vehicleList.ToPagedList(pageNumber, pageSize);
 
             //Return the view.
             return View(vehicleList);
+
+
+
+            
 
 
 
@@ -143,10 +154,14 @@ namespace MovieVehicles.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VehicleID,CreatedBy,Description,Make,Model,MoviePoster,MovieTitle,Status,VehicleName,Year")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "VehicleID,CreatedBy,Description,Make,Model,VehiclePhoto,MovieTitle,Status,VehicleName,Year")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
+                if (vehicle.VehiclePhoto == "" || vehicle.VehiclePhoto == null)
+                {
+                    vehicle.VehiclePhoto = "imagecomingsoon.jpg";
+                }
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -215,6 +230,45 @@ namespace MovieVehicles.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+
+        [HttpGet]
+        public ActionResult UploadFile()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult UploadFile(HttpPostedFileBase file)
+        {
+            //Code Found At...
+            //Site Name: c-sharpcorner.com
+            //URL: https://www.c-sharpcorner.com/article/upload-files-in-asp-net-mvc-5/
+
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Photos"), _FileName);
+                    file.SaveAs(_path);
+                }
+                ViewBag.Message = "File Uploaded Successfully!!";
+                return View();
+            }
+            catch
+            {
+                ViewBag.Message = "File upload failed!!";
+                return View();
+            }
+        }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {

@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using MovieVehicles.Models;
 using MovieVehicles.CustomAttributes;
 using MovieVehicles.Enums;
+using PagedList;
+using MovieVehicles.ViewModels;
 
 namespace MovieVehicles.Controllers
 {
@@ -17,15 +19,23 @@ namespace MovieVehicles.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, int? page)
         {
+            //Variable Declarations.
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+            
+
             //Get a list of states.
             var StateAbbr = Enum.GetValues(typeof(Enums.Enumerations.States)).OfType<Enums.Enumerations.States>().ToList();
             ViewBag.States = StateAbbr.ToList();
 
             //Get a list of the events.
-            var eventList = (from v in db.Events
-                               select v).ToList();
+            //var eventList = (from v in db.Events          //Original statement
+            //                   select v).ToList();
+
+            IEnumerable<Event> eventList = (from v in db.Events
+                             select v);
 
             //Sort the records.
             switch (sortOrder)
@@ -33,27 +43,28 @@ namespace MovieVehicles.Controllers
                 case "Date":
                     eventList = (from v in eventList
                                    orderby v.EventDate ascending
-                                   select v).ToList();
+                                   select v).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
                 case "City":
                     eventList = (from v in eventList
                                    orderby v.EventCity ascending
-                                   select v).ToList();
+                                   select v).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
                 case "State":
                     eventList = (from v in eventList
                                  orderby v.EventState ascending
-                                 select v).ToList();
+                                 select v).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
                 default:
                     //If no sort order is specified sort by the event title.
                     eventList = (from v in eventList
                                    orderby v.EventTitle ascending
-                                   select v).ToList();
+                                   select v).ToPagedList(pageNumber, pageSize);    //.ToList();
                     break;
             }
 
-            return View(eventList.ToList());
+            //return View(eventList.ToList());
+            return View(eventList);
 
 
 
@@ -114,16 +125,36 @@ namespace MovieVehicles.Controllers
         // GET: Events/Details/5
         public ActionResult Details(int? id)
         {
+            //Variable Declarations.
+            EventVM eventViewModel = new EventVM();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //Get the event information.
             Event @event = db.Events.Find(id);
+            
+            //Fill the event view model with the individual event information.
+            eventViewModel.EventID = @event.EventID;
+            eventViewModel.EventTitle = @event.EventTitle;
+            eventViewModel.EventDescription = @event.EventDescription;
+            eventViewModel.EventDate = @event.EventDate;
+            eventViewModel.EventCity = @event.EventCity;
+            eventViewModel.EventState = @event.EventState;
+            eventViewModel.VehicleName = (from v in db.Vehicles
+                                          where v.VehicleID == @event.VehicleID
+                                          select v.VehicleName).FirstOrDefault().ToString();
+            
             if (@event == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+
+            //Display the view.
+            //return View(@event);
+            return View(eventViewModel);
         }
 
         // GET: Events/Create
@@ -131,6 +162,18 @@ namespace MovieVehicles.Controllers
         [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Create()
         {
+            //Get a list of states.
+            var StateAbbr = Enum.GetValues(typeof(Enums.Enumerations.States)).OfType<Enums.Enumerations.States>().ToList();
+            ViewBag.States = StateAbbr.ToList();
+
+            //Build a list of vehicle ID and name values.
+            var vehicleList = (from v in db.Vehicles
+                               select v).ToList();
+
+            //Store the list of vehicles in the ViewBag so that it will be available in the event Edit View.
+            ViewBag.SelectVehicleList = new SelectList(vehicleList, "VehicleID", "VehicleName");
+
+            //Display the View.
             return View();
         }
 
@@ -155,11 +198,25 @@ namespace MovieVehicles.Controllers
         [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Edit(int? id)
         {
+            //Build a list of vehicle ID and name values.
+            var vehicleList = (from v in db.Vehicles
+                               select v).ToList();
+
+            //Store the list of vehicles in the ViewBag so that it will be available in the event Edit View.
+            ViewBag.SelectVehicleList = new SelectList(vehicleList, "VehicleID", "VehicleName");
+
+            //Get a list of states.
+            var StateAbbr = Enum.GetValues(typeof(Enums.Enumerations.States)).OfType<Enums.Enumerations.States>().ToList();
+            ViewBag.States = StateAbbr.ToList();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //Get the event information.
             Event @event = db.Events.Find(id);
+            
             if (@event == null)
             {
                 return HttpNotFound();
@@ -188,16 +245,35 @@ namespace MovieVehicles.Controllers
         [AuthorizationOrRedirect(Roles = "Site Administrator")]
         public ActionResult Delete(int? id)
         {
+            //Variable Declarations.
+            EventVM eventViewModel = new EventVM();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //Get the event information for the event to be deleted.
             Event @event = db.Events.Find(id);
+
+            //Fill the event view model with the individual event information.
+            eventViewModel.EventID = @event.EventID;
+            eventViewModel.EventTitle = @event.EventTitle;
+            eventViewModel.EventDescription = @event.EventDescription;
+            eventViewModel.EventDate = @event.EventDate;
+            eventViewModel.EventCity = @event.EventCity;
+            eventViewModel.EventState = @event.EventState;
+            eventViewModel.VehicleName = (from v in db.Vehicles
+                                          where v.VehicleID == @event.VehicleID
+                                          select v.VehicleName).FirstOrDefault().ToString();
+
+
             if (@event == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            //return View(@event);
+            return View(eventViewModel);
         }
 
         // POST: Events/Delete/5

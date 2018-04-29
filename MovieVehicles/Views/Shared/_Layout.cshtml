@@ -3,13 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Limelight Movie Vehicle Database</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">*@
+    <img src="~/Images/movie-reels-and-popcorn.png" height="211" width="322" style="display:block;margin:auto;border:0px;" />
+
     <div class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <div class="navbar-header">
@@ -21,11 +22,32 @@
                 @Html.ActionLink("Famous Movie Vehicles", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Vehicles", "Index", "Vehicles")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
-                    <li>@Html.ActionLink("Events", "Index", "Events")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
-                    <li>@Html.ActionLink("Reviews", "Index", "Reviews")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
-                </ul>
+
+                @if (User.IsInRole("Site Administrator") || User.IsInRole("Subscriber"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Vehicles", "Index", "Vehicles")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                        <li>@Html.ActionLink("Events", "Index", "Events")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                        <li>@Html.ActionLink("Reviews", "Index", "Reviews")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                        <li>@Html.ActionLink("About", "About", "Home")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Vehicles", "Index", "Vehicles")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                        <li>@Html.ActionLink("Events", "Index", "Events")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                        <li>@Html.ActionLink("About", "About", "Home")&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+                    </ul>
+                }
+
+
+
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

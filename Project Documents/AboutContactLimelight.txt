@@ -1,0 +1,10 @@
+about limelight
+
+The Limelight Movie Vehicle Database web app is the single most authoritative source for information about movie vehicles.  Limelight offers users a searchable database of vehicle information, vehicle events, and reviews of movies vehicles.  General users will be able to browse vehicle and event information.  Registered subscribers will have the ability to read and post reviews about vehicles in addition to being able to view information on vehicles and events in the Limelight database.
+
+Contact Limelight Staff
+
+Got questions about movie vehicles?  We have the answers!!  Get in touch with use so that we can answer your nagging questions about movie vehicles.
+
+Phone: 1-800-555-0001
+Email: zoomzoom@limelight.com

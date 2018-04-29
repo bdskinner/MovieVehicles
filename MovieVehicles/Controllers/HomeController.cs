@@ -20,43 +20,35 @@ namespace MovieVehicles.Controllers
             //Variable Declarations.
             //Get top 5 most recently posted events to display on the index page.
             var topFiveEvents = (from e in db.Events
+                                 orderby e.EventID descending
                                 select e).Take(5);
 
             //Get top 5 most recently posted reviews to display on the index page.
             var topFiveReviews = (from r in db.Reviews
-                                 select r).Take(5);
+                                  orderby r.ReviewID descending
+                                  select r).Take(5);
 
             //Add the Top 5 reviews to the ViewBag.
             ViewBag.TopFiveReviews = topFiveReviews.ToList();
 
-            //Get the photo names and file paths.
-            //var photoList = (from p in db.Vehicles
-            //                 where p.VehiclePhoto != "imagecomingsoon.jpg"
-            //                 select p.VehiclePhoto).ToList();
-
-            ////Add the photo paths for the slideshow to the ViewBag.
-            //ViewBag.SlideShowPhotos = photoList.ToList();
-
-
-
-
-
-
+            //Get the photo names and file names.
             var photoList2 = (from p in db.Vehicles
                               where p.VehiclePhoto != "imagecomingsoon.jpg"
                               select new { p.VehiclePhoto, p.VehicleName }).ToList();
+
+            //Create a list to store the vehicle names and the file names for the photos.
             List<VehiclePhoto> vehiclePhotoList = new List<VehiclePhoto>();
+
+            //Add the vehicle names and photo file names to the list.
             foreach (var photo in photoList2)
             {
                 VehiclePhoto newVehiclePhoto = new VehiclePhoto(photo.VehiclePhoto, photo.VehicleName);
                 vehiclePhotoList.Add(newVehiclePhoto);
             }
+
+            //Store the list in the ViewBag to send to the Home Index page.
             ViewBag.SlideShowPhotos = vehiclePhotoList;
-
-
-
-
-
+            
             //Dislay the view.
             return View(topFiveEvents.ToList());
         }

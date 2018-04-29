@@ -1,4 +1,5 @@
-﻿@model MovieVehicles.Models.Event
+﻿@*@model MovieVehicles.Models.Event*@
+@model MovieVehicles.ViewModels.EventVM
 
 @{
     ViewBag.Title = "Details";
@@ -18,19 +19,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EventDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventDescription)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.EventDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.EventDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDescription)
         </dd>
 
         <dt>
@@ -50,21 +51,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.VehicleID)
+            @Html.DisplayNameFor(model => model.VehicleName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VehicleID)
+            @Html.DisplayFor(model => model.VehicleName)
         </dd>
 
     </dl>
 </div>
 <p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.EventID }) |
-    @Html.ActionLink("Back to List", "Index")*@
-
-
-
     @if (User.IsInRole("Site Administrator"))
     {
         @Html.ActionLink("Edit | ", "Edit", new { id = Model.EventID }) 

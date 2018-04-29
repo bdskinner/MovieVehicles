@@ -11,6 +11,7 @@ namespace MovieVehicles.ViewModels
         [Display(Name = "Reviewer Name")]
         public string FirstName { get; set; }   //From Review Model
 
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }   //From Review Model
 
         [Display(Name = "Review Date")]
@@ -25,6 +26,7 @@ namespace MovieVehicles.ViewModels
         [Display(Name = "Review Title")]
         public string ReviewTitle { get; set; }   //From Review Model
 
+        [Display(Name = "Vehicle Name")]
         public int VehicleID { get; set; }   //From Review Model
 
         [Display(Name = "Vehicle Name")]

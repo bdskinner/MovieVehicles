@@ -1,14 +1,51 @@
 ﻿
 @{
-    ViewBag.Title = "ApplicationAdministration";
+    ViewBag.Title = "Application Administration";
 }
 
-<h2>ApplicationAdministration</h2>
+<br /><br />
+<h2>Site Adminitrator Menu</h2>
+<br />
 
-<ul class="nav navbar-nav navbar-right">
+@*<ul class="nav navbar-nav navbar-right">
     <li>@Html.ActionLink("Manage Vehicles", "Index", "Vehicles")</li>
     <li>@Html.ActionLink("Manage Reviews", "Index", "Reviews")</li>
     <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
     <li>@Html.ActionLink("Manage Roles", "Index", "IdentityRole")</li>
-</ul>
+    <li>@Html.ActionLink("Upload Vehicle Photos", "UploadFile", "Vehicles")</li>
+</ul>*@
+
+
+<table>
+    <tr>
+        <td style="padding:25px;text-align:center;">
+            <img src="~/Images/wheel.png" height="100px" width="100px" /><br />
+            @Html.ActionLink("Manage Vehicles", "Index", "Vehicles")
+        </td>
+        <td style="padding:25px;text-align:center;">
+            <img src="~/Images/pen.png" height="100px" width="100px" /><br />
+            @Html.ActionLink("Manage Reviews", "Index", "Reviews")
+        </td>
+        <td style="padding:25px;text-align:center;">
+            <img src="~/Images/default-user.png" height="100px" width="100px" /><br />
+            @Html.ActionLink("Manage Users", "Index", "Account")
+        </td>
+        <td style="padding:25px;text-align:center;">
+            <img src="~/Images/roles.png" height="100px" width="100px" /><br />
+            @Html.ActionLink("Manage Roles", "Index", "IdentityRole")
+        </td>
+        <td style="padding:25px;text-align:center;">
+            <img src="~/Images/camera.png" height="100px" width="100px" /><br />
+            @Html.ActionLink("Upload Vehicle Photos", "UploadFile", "Vehicles")
+        </td>
+    </tr>
+    <tr>
+        
+    </tr>
+</table>
+
+
+
+
+
 

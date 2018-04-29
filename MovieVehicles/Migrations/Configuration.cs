@@ -138,7 +138,7 @@ namespace MovieVehicles.Migrations
 
                 new Models.Vehicle()
                 {
-                    VehicleName = "James Bond?s submersible Lotus",
+                    VehicleName = "James Bond's submersible Lotus",
                     Description = "The Lotus Esprit S1 featured in 'The Spy Who Loved Me' is a 1976 Lotus Esprit S1.  Two Stree legal Esprit S1's were used in the movie as well as several body shells for the underwater scenes.  In the movie the Lotus was not just amphibious, it also contained cannons that spray cement on to pursuing vehicles. It also has wheel arches that turn into fins, a small periscope on the roof enabling 007 to navigate at speed underwater and its other weaponry includes a missile launched from its rear deck, mines, and torpedoes which were all compliments of Q branch.",
                     CreatedBy = "Perry Oceanographic Inc.",
                     MovieTitle = "The Spy Who Loved Me",
@@ -251,6 +251,84 @@ namespace MovieVehicles.Migrations
                     Make = "Ford",
                     Model = "Falcon XB GT Coupe",
                     Year = 1973
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Knight Industries Two Thousand (KITT)",
+                    Description = "KITT is an artificially intelligent electronic computer module in the body of a highly advanced, very mobile, robotic automobile.  KITT is used  by the Foundation for Law and Government (FLAG) and its parent Knight Industries in the Foundation's crime-fighting crusade.",
+                    CreatedBy = "Pontiac",
+                    MovieTitle = "Knight Rider",
+                    VehiclePhoto = "KITT.jpg",
+                    Status = "Unknown",
+                    Make = "Pontiac",
+                    Model = "Firebird Trans Am",
+                    Year = 1982
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "The Orca",
+                    Description = "Captained by Eccentric fisherman Quint The Orca was used to persue the killer great whte that was terrorizing a small New England Town",
+                    CreatedBy = "Unknown",
+                    MovieTitle = "Jaws",
+                    VehiclePhoto = "Orca.jpg",
+                    Status = "Utilized for further study by Dr. Matthew Hooper at the Woods Hole Oceanagraphic Institute",
+                    Make = "None",
+                    Model = "None",
+                    Year = 0
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Steve McQueen's Triumph",
+                    Description = "This Triumph TR6 was riden by Steve McQueen to escape from a escape proof prison during World War 2 and make his way across occupied Europe.",
+                    CreatedBy = "Triumph",
+                    MovieTitle = "The Great Escape",
+                    VehiclePhoto = "greatescapetriumph.jpg",
+                    Status = "Purchased by private collector (Dick Shepherd)",
+                    Make = "Triumph",
+                    Model = "TR6",
+                    Year = 1961
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "The Family Truckster",
+                    Description = "The Wagon Queen Family Truckster station wagon was created specifically for the film. It is based on a 1979 Ford LTD Country Squire station wagon.[10] The car was designed by George Barris, and it lampooned American cars of the late 1970s. The Truckster features a pale avocado metallic green paint scheme; extensive imitation wood-paneling decals; eight headlights",
+                    CreatedBy = "George Barris",
+                    MovieTitle = "National Lampoon's Vacation",
+                    VehiclePhoto = "FamilyTruckster.jpg",
+                    Status = "Unknown",
+                    Make = "Ford",
+                    Model = "LTD Country Squire",
+                    Year = 1979
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Milner’s Deuce Coupe",
+                    Description = "This 1932 Ford Coupe cruised around town and could beat anyone looking for a race.",
+                    CreatedBy = "Ford Motor Co.",
+                    MovieTitle = "American Graffiti",
+                    VehiclePhoto = "DeuceCoupe.jpg",
+                    Status = "Purchased by private collector (Steve Fitch)",
+                    Make = "Ford",
+                    Model = "Coupe",
+                    Year = 1932
+                },
+
+                new Models.Vehicle()
+                {
+                    VehicleName = "Mr. Frye’s Ferrari",
+                    Description = "This Ferrari was used by Ferris Bueller and two friends to take day long adventure while skipping school.",
+                    CreatedBy = "Ferrari",
+                    MovieTitle = "Ferris Bueller's Day Off",
+                    VehiclePhoto = "fbferrari.jpg",
+                    Status = "Sold at auction to a private collector  in 2015 for $16,830,000",
+                    Make = "Ferrari",
+                    Model = "250 GT California Spyder SWB",
+                    Year = 1961
                 }
             );
 
@@ -284,6 +362,36 @@ namespace MovieVehicles.Migrations
                     EventCity = "Traverse City",
                     EventState = "MI",
                     VehicleID = 1
+                },
+
+                new Models.Event()
+                {
+                    EventTitle = "James Dean Mercury at Hagerty Insurance",
+                    EventDescription = "The Mercury James drove in Rebel Without a Cause will be on display at Hagerty Insurance.",
+                    EventDate = new DateTime(2018, 4, 15),
+                    EventCity = "Traverse City",
+                    EventState = "MI",
+                    VehicleID = 19
+                },
+
+                new Models.Event()
+                {
+                    EventTitle = "Ecto 1 at State Hospital",
+                    EventDescription = "Ecto 1 from the movie Ghostbusters will be at the former state hospital and available for rides.",
+                    EventDate = new DateTime(2018, 6, 11),
+                    EventCity = "Traverse City",
+                    EventState = "MI",
+                    VehicleID = 16
+                },
+
+                new Models.Event()
+                {
+                    EventTitle = "Orca to Ferry Passengers",
+                    EventDescription = "The boat Orca from the movie Jaws will ferry passengers to and from south Manitou Island.",
+                    EventDate = new DateTime(2018, 8, 1),
+                    EventCity = "Empire",
+                    EventState = "MI",
+                    VehicleID = 23
                 }
             );
 
@@ -317,6 +425,176 @@ namespace MovieVehicles.Migrations
                     ReviewDate = new DateTime(2018, 1, 7),
                     ReviewText = "The Arrow was pretty cool.  Although I thought John Velis would be taller.",
                     VehicleID = 3
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Amazing",
+                    FirstName = "Izzy",
+                    LastName = "Deadyet",
+                    ReviewDate = new DateTime(2018, 3, 8),
+                    ReviewText = "KITT was pretty cool.  And he actually talks.",
+                    VehicleID = 22
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Too Cool",
+                    FirstName = "Warren",
+                    LastName = "Peace",
+                    ReviewDate = new DateTime(2018, 3, 11),
+                    ReviewText = "KITT was awesome and very sleek.  Michael seemed shorter in person.",
+                    VehicleID = 22
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Just like the Movie",
+                    FirstName = "Luke",
+                    LastName = "Warmwater",
+                    ReviewDate = new DateTime(2018, 4, 1),
+                    ReviewText = "Got to ride with 'The Bandit' from the movie.  Getting to ride in the actual car was a trip.",
+                    VehicleID = 15
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "OK",
+                    FirstName = "Izzy",
+                    LastName = "Deadyet",
+                    ReviewDate = new DateTime(2018, 4, 2),
+                    ReviewText = "Got to see the Trans Am from Smokey and the Bandit.  Seemed cooler in the movie than in person.",
+                    VehicleID = 15
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "OK",
+                    FirstName = "Warren",
+                    LastName = "Peace",
+                    ReviewDate = new DateTime(2018, 2, 2),
+                    ReviewText = "A cool car for a day off from school.  Too bad they don't let people take rides.",
+                    VehicleID = 27
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "OK",
+                    FirstName = "Luke",
+                    LastName = "Warmwater",
+                    ReviewDate = new DateTime(2018, 5, 15),
+                    ReviewText = "Got to go for a ride, totally cool.  I wish I could drive it.",
+                    VehicleID = 27
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "OK",
+                    FirstName = "Luke",
+                    LastName = "Warmwater",
+                    ReviewDate = new DateTime(2018, 4, 2),
+                    ReviewText = "Got to see it displayed at the maritime academy in Traverse City.  Wish I could take it out in the bay for a spin.",
+                    VehicleID = 10
+                },   //---
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Not as Cool",
+                    FirstName = "Warren",
+                    LastName = "Peace",
+                    ReviewDate = new DateTime(2018, 6, 13),
+                    ReviewText = "Watched the TV show and movie with Adam West.  I remember the car being cooler when I was a kid.",
+                    VehicleID = 11
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Cool",
+                    FirstName = "Izzy",
+                    LastName = "Deadyet",
+                    ReviewDate = new DateTime(2018, 6, 13),
+                    ReviewText = "Saw this vehicle at Hagerty Insurance.  Just as cool in person as in the movie.",
+                    VehicleID = 6
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Awesome Just Like Steve McQueen",
+                    FirstName = "Warren",
+                    LastName = "Peace",
+                    ReviewDate = new DateTime(2018, 6, 30),
+                    ReviewText = "Saw this vehicle at Hagerty Insurance, I can't blame Steve McQueen for wanting to buy it back.",
+                    VehicleID = 6
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Not Sure About the Hype",
+                    FirstName = "Luke",
+                    LastName = "Warmwater",
+                    ReviewDate = new DateTime(2018, 4, 22),
+                    ReviewText = "Saw this vehicle at Hagerty Insurance.  Not sure why everyone thinks this is a cool car.",
+                    VehicleID = 6
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Unbelievable",
+                    FirstName = "Luke",
+                    LastName = "Warmwater",
+                    ReviewDate = new DateTime(2018, 6, 1),
+                    ReviewText = "Can't believe this motorcycle was used to jump a fence.",
+                    VehicleID = 24
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Runs Like a Champ",
+                    FirstName = "Warren",
+                    LastName = "Peace",
+                    ReviewDate = new DateTime(2018, 3, 1),
+                    ReviewText = "Got to ride the motorcycle around the track in Cedar, still runs like it was brand new.",
+                    VehicleID = 24
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Classic Bond Car",
+                    FirstName = "Warren",
+                    LastName = "Peace",
+                    ReviewDate = new DateTime(2018, 1, 12),
+                    ReviewText = "Love the Aston Martins.  They are classic Bond cars.",
+                    VehicleID = 17
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Don't Get It",
+                    FirstName = "Izzy",
+                    LastName = "Deadyet",
+                    ReviewDate = new DateTime(2018, 4, 30),
+                    ReviewText = "I saw the James Bond Aston Martin.  I guess I just don't understand why people think it's cool.  It's just a car to me.",
+                    VehicleID = 17
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Time for a Vacation",
+                    FirstName = "Warren",
+                    LastName = "Peace",
+                    ReviewDate = new DateTime(2018, 2, 17),
+                    ReviewText = "I was able to see the car at a stop in Empire.  Definately a memorable  car.",
+                    VehicleID = 25
+                },
+
+                new Models.Review()
+                {
+                    ReviewTitle = "Room for the Whole Family",
+                    FirstName = "Izzy",
+                    LastName = "Deadyet",
+                    ReviewDate = new DateTime(2017, 11, 12),
+                    ReviewText = "I saw this car at a tour stop in Mackinac City.  Kind of cool in a weird way and very roomy inside.",
+                    VehicleID = 25
                 }
             );
         }
