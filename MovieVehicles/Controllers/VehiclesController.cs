@@ -22,15 +22,8 @@ namespace MovieVehicles.Controllers
         public ActionResult Index(string sortOrder, int? page)
         {
             //Variable Declarations.
-            //MovieRepository movieRepository = new MovieRepository();
-            //IEnumerable<Movie> movies;
             int pageNumber = (page ?? 1);
             int pageSize = 10;
-            
-
-            //Get a list of the vehicles.
-            //var vehicleList = (from v in db.Vehicles      //original statement
-            //                   select v).ToList();
 
             IEnumerable<Vehicle> vehicleList = (from v in db.Vehicles
                                        select v);
@@ -56,34 +49,20 @@ namespace MovieVehicles.Controllers
                     break;
             }
 
-            //Set Paginate settings.
-            //movies = movies.ToPagedList(pageNumber, pageSize);
-            //vehicleList = vehicleList.ToPagedList(pageNumber, pageSize);
-
             //Return the view.
             return View(vehicleList);
-
-
-
-            
-
-
-
-            //return View(db.Vehicles.ToList());
         }
 
         [HttpPost]
         //public ActionResult Index(string searchTitle, string searchName, int? page)
-        public ActionResult Index(string searchTitle, string searchName, string createdBy)
+        public ActionResult Index(string searchTitle, string searchName, string createdBy, int? page)
         {
             //Variable Declarations.
-            //IEnumerable<Review> reviews;
-            //IEnumerable<Movie> movieResults = null;
-            //int pageSize = 50;
-            //int pageNumber = (page ?? 1);
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
 
-            var vehicleList = (from v in db.Vehicles
-                               select v).ToList();
+            IEnumerable<Vehicle> vehicleList = (from v in db.Vehicles
+                               select v);
 
 
             //If the movie title was passed to the action, search by the title entered.
@@ -91,15 +70,15 @@ namespace MovieVehicles.Controllers
             {
                 vehicleList = (from v in vehicleList
                                where v.MovieTitle.ToUpper().Contains(searchTitle.ToUpper())
-                               select v).ToList();
+                               select v).ToPagedList(pageNumber, pageSize);   
             }
 
-            //If the vehicle name was passed to the action, search by the title entered.
+            //If the vehicle name was passed to the action, search by the name entered.
             if (searchName != null)
             {
                 vehicleList = (from v in vehicleList
                                where v.VehicleName.ToUpper().Contains(searchName.ToUpper())
-                               select v).ToList();
+                               select v).ToPagedList(pageNumber, pageSize);   
             }
 
             //If the created by value was passed to the action, search by the person who created the vehicle.
@@ -107,21 +86,8 @@ namespace MovieVehicles.Controllers
             {
                 vehicleList = (from v in vehicleList
                                where v.CreatedBy.ToUpper().Contains(createdBy.ToUpper())
-                               select v).ToList();
+                               select v).ToPagedList(pageNumber, pageSize);   
             }
-
-
-
-            //If the Genre was passed to the action, sort by the genre selected.
-            //if (genreFilter != "" || genreFilter == null)
-            //{
-            //    movies = from m in movies
-            //             where m.GenreTitle == genreFilter
-            //             select m;
-            //}
-
-            //Set Paginate settings.
-            //movies = movies.ToPagedList(pageNumber, pageSize);
 
             //Return the view.
             return View(vehicleList);

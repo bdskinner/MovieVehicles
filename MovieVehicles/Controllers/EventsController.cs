@@ -73,14 +73,11 @@ namespace MovieVehicles.Controllers
         }
 
         [HttpPost]
-        //public ActionResult Index(string searchTitle, string searchName, int? page)
-        public ActionResult Index(string searchTitle, string searchCity, string searchstate)
+        public ActionResult Index(string searchTitle, string searchCity, string searchstate, int? page)
         {
             //Variable Declarations.
-            //IEnumerable<Review> reviews;
-            //IEnumerable<Movie> movieResults = null;
-            //int pageSize = 50;
-            //int pageNumber = (page ?? 1);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
 
             //Get a list of states.
             var StateAbbr = Enum.GetValues(typeof(Enums.Enumerations.States)).OfType<Enums.Enumerations.States>().ToList();
@@ -88,7 +85,7 @@ namespace MovieVehicles.Controllers
 
             //Get a list of the events.
             var eventList = (from v in db.Events
-                               select v).ToList();
+                             select v).ToList();
 
 
             //If the movie title was passed to the action, search by the title entered.
@@ -99,27 +96,28 @@ namespace MovieVehicles.Controllers
                                select v).ToList();
             }
 
-            //If the vehicle name was passed to the action, search by the title entered.
+            //If the vehicle name was passed to the action, search by the city entered.
             if (searchCity != null)
             {
                 eventList = (from v in eventList
-                               where v.EventCity.ToUpper().Contains(searchCity.ToUpper())
-                               select v).ToList();
+                             where v.EventCity.ToUpper().Contains(searchCity.ToUpper())
+                             select v).ToList();
             }
 
-            //If the Genre was passed to the action, sort by the genre selected.
+            //If the Genre was passed to the action, sort by the state selected.
             if (searchstate != "" || searchstate != "Choose a State" || searchstate == null)
             {
                 eventList = (from v in eventList
-                               where v.EventState.ToUpper().Contains(searchstate.ToUpper())
-                               select v).ToList();
+                             where v.EventState.ToUpper().Contains(searchstate.ToUpper())
+                             select v).ToList();
             }
 
             //Set Paginate settings.
             //movies = movies.ToPagedList(pageNumber, pageSize);
 
             //Return the view.
-            return View(eventList.ToList());
+            //return View(eventList.ToList());
+            return View(eventList.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Events/Details/5

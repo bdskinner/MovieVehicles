@@ -23,10 +23,8 @@ namespace MovieVehicles.Controllers
             //Variable Declarations.
             int pageNumber = (page ?? 1);
             int pageSize = 10;
-            //List<ReviewVM> ReviewVMlist = new List<ReviewVM>(); // to hold list of reviews
             IEnumerable<ReviewVM> ReviewVMlist = null; // to hold list of reviews
-
-            //ReviewVMlist = BuildVehicleViewModelList();       //Original statement
+            
             ReviewVMlist = (IEnumerable<ReviewVM>)BuildVehicleViewModelList();
 
             switch (sortOrder)
@@ -34,42 +32,35 @@ namespace MovieVehicles.Controllers
                 case "Date":
                     ReviewVMlist = (from r in ReviewVMlist
                                   orderby r.ReviewDate ascending
-                                  select r).ToPagedList(pageNumber, pageSize);    //.ToList();
+                                  select r).ToPagedList(pageNumber, pageSize);   
                     break;
                 case "VehicleName":
                     ReviewVMlist = (from r in ReviewVMlist
                                   orderby r.VehicleName ascending
-                                  select r).ToPagedList(pageNumber, pageSize);    //.ToList();
+                                  select r).ToPagedList(pageNumber, pageSize);   
                     break;
                 default:
                     ReviewVMlist = (from r in ReviewVMlist
                                     orderby r.ReviewTitle ascending
-                                  select r).ToPagedList(pageNumber, pageSize);    //.ToList();
+                                  select r).ToPagedList(pageNumber, pageSize);   
                     break;
             }
-
-            //return View((IList<ReviewVM>)ReviewVMlist);
+            
             return View(ReviewVMlist);
-
-
-            //return View(db.Reviews.ToList());
         }
 
         [HttpPost]
-        //public ActionResult Index(string searchTitle, string searchName, int? page)
-        public ActionResult Index(string searchTitle, string searchName)
+        public ActionResult Index(string searchTitle, string searchName, int? page)
         {
             //Variable Declarations.
             List<ReviewVM> ReviewVMlist = new List<ReviewVM>();
-            //IEnumerable<Review> reviews;
-            //IEnumerable<Movie> movieResults = null;
-            //int pageSize = 50;
-            //int pageNumber = (page ?? 1);
-            
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
             //Get the information for the reviews as well as the vehicle name the review is for from the database.
             var reviewlist = (from r in db.Reviews
                               join v in db.Vehicles on r.VehicleID equals v.VehicleID
-                              select new { r.ReviewID, r.ReviewTitle, r.ReviewDate, v.VehicleName }).ToList();
+                              select new { r.ReviewID, r.ReviewTitle, r.ReviewDate, v.VehicleName });   //.ToList();
 
             //Store the reviews data in reviewlist.
             foreach (var item in reviewlist)
@@ -86,8 +77,8 @@ namespace MovieVehicles.Controllers
             if (searchTitle != null)
             {
                 ReviewVMlist = (from r in ReviewVMlist
-                               where r.ReviewTitle.ToUpper().Contains(searchTitle.ToUpper())
-                               select r).ToList();
+                                where r.ReviewTitle.ToUpper().Contains(searchTitle.ToUpper())
+                                select r).ToList();
             }
 
             //If the vehicle name was passed to the action, search by the title entered.
@@ -98,21 +89,8 @@ namespace MovieVehicles.Controllers
                                 select r).ToList();
             }
 
-
-
-            //If the Genre was passed to the action, sort by the genre selected.
-            //if (genreFilter != "" || genreFilter == null)
-            //{
-            //    movies = from m in movies
-            //             where m.GenreTitle == genreFilter
-            //             select m;
-            //}
-
-            //Set Paginate settings.
-            //movies = movies.ToPagedList(pageNumber, pageSize);
-
             //Return the view.
-            return View(ReviewVMlist);
+            return View(ReviewVMlist.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Reviews/Details/5
